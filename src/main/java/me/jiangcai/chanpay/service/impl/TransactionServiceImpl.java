@@ -2,6 +2,7 @@ package me.jiangcai.chanpay.service.impl;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import me.jiangcai.chanpay.data.Request;
+import me.jiangcai.chanpay.data.Response;
 import me.jiangcai.chanpay.security.Sign;
 import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.support.ChanpayXmlMapper;
@@ -47,7 +48,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void execute(Request request) throws IOException, SignatureException {
+    public Response execute(Request request) throws IOException, SignatureException {
 
         sign.sign(request);
         if (log.isDebugEnabled()) {
@@ -66,7 +67,7 @@ public class TransactionServiceImpl implements TransactionService {
             post.setEntity(entity);
 
 //            String code =
-            client.execute(post, new ResponseHandler());
+            return client.execute(post, new ResponseHandler());
 //            if (log.isDebugEnabled())
 //                log.debug("result:" + code);
         }

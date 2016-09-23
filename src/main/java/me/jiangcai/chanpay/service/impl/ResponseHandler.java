@@ -38,11 +38,14 @@ class ResponseHandler extends AbstractResponseHandler<Response> {
         JsonNode info = tree.get("INFO");
         ResponseHeader header = xmlMapper.readValue(xmlMapper.treeAsTokens(info), ResponseHeader.class);
 
+        // 安全校验
+        header.setSignedMessage(null);
 
         if (!header.isSuccess()) {
             throw new SystemException(header);
         }
         // 根据不同的业务组装不同的响应内容
+
 
         return new Response(header);
     }

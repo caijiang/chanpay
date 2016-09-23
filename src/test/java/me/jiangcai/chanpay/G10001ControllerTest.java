@@ -1,6 +1,7 @@
 package me.jiangcai.chanpay;
 
 import me.jiangcai.chanpay.data.Request;
+import me.jiangcai.chanpay.data.Response;
 import me.jiangcai.chanpay.model.AccountProperty;
 import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.test.TestTransaction;
@@ -40,8 +41,9 @@ public class G10001ControllerTest extends AbstractTestBase {
         Request request = new Request("5ee26ddb404a590", testTransaction);
 //        System.out.println(xmlMapper.writeValueAsString(request));
 
-        transactionService.execute(request);
+        Response response = transactionService.execute(request);
 
+        System.out.println(response);
 //        G10001Bean bean = new G10001Bean();
 //        testPackage(bean);
 
