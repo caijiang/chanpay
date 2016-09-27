@@ -82,6 +82,19 @@ public class TransactionServiceTest extends AbstractTestBase {
 
         QueryTradeResult result = transactionService.execute(queryTrade, new QueryTradeHandler());
         System.out.println(result);
+        assertThat(result)
+                .isNotNull();
+
+        assertThat(result.getSerialNumber())
+                .isNotEmpty();
+        assertThat(result.getChanPayNumber())
+                .isNotEmpty();
+        assertThat(result.getAmount().doubleValue())
+                .isGreaterThan(0);
+        assertThat(result.getStatus())
+                .isNotNull();
+        assertThat(result.getTime())
+                .isNotNull();
     }
 
 

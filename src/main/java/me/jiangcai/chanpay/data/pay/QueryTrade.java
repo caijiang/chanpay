@@ -18,7 +18,7 @@ public class QueryTrade extends PayRequest implements BusinessSerial {
      * 外部企业流水号
      * 对应电子回单中“付款单号”字段；
      */
-    @JsonProperty("out_trade_no")
+    @JsonProperty("outer_trade_no")
     private String serialNumber;
     @JsonProperty("trade_type")
     private TradeType type;
