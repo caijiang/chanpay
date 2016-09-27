@@ -20,9 +20,9 @@ import java.nio.charset.Charset;
 /**
  * @author CJ
  */
-class ResponseHandler extends AbstractResponseHandler<Response> {
+class ChanResponseHandler extends AbstractResponseHandler<Response> {
 
-    private static final Log log = LogFactory.getLog(ResponseHandler.class);
+    private static final Log log = LogFactory.getLog(ChanResponseHandler.class);
     private static final XmlMapper xmlMapper = new ChanpayXmlMapper();
 
     @Override

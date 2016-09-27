@@ -3,6 +3,7 @@ package me.jiangcai.chanpay.data;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import me.jiangcai.chanpay.BusinessSerial;
 import me.jiangcai.chanpay.model.AccountProperty;
 import me.jiangcai.chanpay.model.AccountType;
 import me.jiangcai.chanpay.model.IdType;
@@ -17,7 +18,7 @@ import java.util.Locale;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class SingleRealTransaction extends Transaction {
+public abstract class SingleRealTransaction extends Transaction implements BusinessSerial {
     /**
      * 业务代码, 接入生产前，业务人员会提供
      * 代收付系统分配
