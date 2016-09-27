@@ -1,6 +1,7 @@
 package me.jiangcai.chanpay.service.impl;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
 import me.jiangcai.chanpay.data.Request;
 import me.jiangcai.chanpay.data.Response;
@@ -39,6 +40,10 @@ public class TransactionServiceImpl implements TransactionService {
     private static String MERCHANT_PRIVATE_KEY = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAO/6rPCvyCC+IMalLzTy3cVBz/+wamCFNiq9qKEilEBDTttP7Rd/GAS51lsfCrsISbg5td/w25+wulDfuMbjjlW9Afh0p7Jscmbo1skqIOIUPYfVQEL687B0EmJufMlljfu52b2efVAyWZF9QBG1vx/AJz1EVyfskMaYVqPiTesZAgMBAAECgYEAtVnkk0bjoArOTg/KquLWQRlJDFrPKP3CP25wHsU4749t6kJuU5FSH1Ao81d0Dn9m5neGQCOOdRFi23cV9gdFKYMhwPE6+nTAloxI3vb8K9NNMe0zcFksva9c9bUaMGH2p40szMoOpO6TrSHO9Hx4GJ6UfsUUqkFFlN76XprwE+ECQQD9rXwfbr9GKh9QMNvnwo9xxyVl4kI88iq0X6G4qVXo1Tv6/DBDJNkX1mbXKFYL5NOW1waZzR+Z/XcKWAmUT8J9AkEA8i0WT/ieNsF3IuFvrIYG4WUadbUqObcYP4Y7Vt836zggRbu0qvYiqAv92Leruaq3ZN1khxp6gZKl/OJHXc5xzQJACqr1AU1i9cxnrLOhS8m+xoYdaH9vUajNavBqmJ1mY3g0IYXhcbFm/72gbYPgundQ/pLkUCt0HMGv89tn67i+8QJBALV6UgkVnsIbkkKCOyRGv2syT3S7kOv1J+eamGcOGSJcSdrXwZiHoArcCZrYcIhOxOWB/m47ymfE1Dw/+QjzxlUCQCmnGFUO9zN862mKYjEkjDN65n1IUB9Fmc1msHkIZAQaQknmxmCIOHC75u4W0PGRyVzq8KkxpNBq62ICl7xmsPM=";
     private final Sign sign;
     private final XmlMapper xmlMapper = new ChanpayXmlMapper();
+    /**
+     * 本服务提供出来的异步通知接口URL
+     */
+    private final String notifyUrl;
     @Autowired
     private Environment environment;
 
@@ -52,6 +57,9 @@ public class TransactionServiceImpl implements TransactionService {
                 sign = new Sign(inputStream, keyPass, certificateInputStream);
             }
         }
+
+        //
+        notifyUrl = environment.getRequiredProperty("chanpay.notify.url");
     }
 
     @Override
@@ -93,6 +101,12 @@ public class TransactionServiceImpl implements TransactionService {
         if (request instanceof BusinessSerial) {
             if (((BusinessSerial) request).getSerialNumber() == null)
                 ((BusinessSerial) request).setSerialNumber(UUID.randomUUID().toString().replace("-", ""));
+        }
+
+        if (request instanceof AsynchronousNotifiable) {
+            if (((AsynchronousNotifiable) request).getNotifyUrl() == null) {
+                ((AsynchronousNotifiable) request).setNotifyUrl(notifyUrl);
+            }
         }
 
         signRequest(request);
