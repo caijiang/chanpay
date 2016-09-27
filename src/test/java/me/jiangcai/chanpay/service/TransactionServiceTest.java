@@ -2,10 +2,13 @@ package me.jiangcai.chanpay.service;
 
 import me.jiangcai.chanpay.AbstractTestBase;
 import me.jiangcai.chanpay.data.pay.CreateInstantTrade;
+import me.jiangcai.chanpay.data.pay.GetPayChannel;
 import me.jiangcai.chanpay.data.pay.PayRequest;
 import me.jiangcai.chanpay.data.pay.QueryTrade;
 import me.jiangcai.chanpay.data.pay.QueryTradeResult;
+import me.jiangcai.chanpay.data.pay.support.PayChannel;
 import me.jiangcai.chanpay.model.TradeType;
+import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
 import org.junit.Test;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.SignatureException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,6 +59,15 @@ public class TransactionServiceTest extends AbstractTestBase {
     }
 
 
+    @Test
+    public void x27() throws IOException, SignatureException {
+        GetPayChannel request = new GetPayChannel();
+        initRequest(request);
+        List<PayChannel> list = transactionService.execute(request, new GetPayChannelHandler());
+        assertThat(list)
+                .isNotEmpty();
+        list.forEach(System.out::println);
+    }
     // 27 28
     // 218 219
 

@@ -7,6 +7,7 @@ import me.jiangcai.chanpay.BusinessSerial;
 import me.jiangcai.chanpay.model.TradeType;
 
 /**
+ * 2.6 查询交易
  * @author CJ
  */
 @EqualsAndHashCode(callSuper = true)

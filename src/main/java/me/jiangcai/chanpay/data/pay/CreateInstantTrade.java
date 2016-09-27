@@ -10,7 +10,7 @@ import me.jiangcai.chanpay.converter.YNSerializer;
 import java.math.BigDecimal;
 
 /**
- * 2.3
+ * 2.3 产生支付
  * 以下返回参数只在扫码支付时返回，即时到账支付业务畅捷方控制页面跳转，就没有同步返回参数了；扫码支付则不控制页面跳转了。
  *
  * @author CJ
