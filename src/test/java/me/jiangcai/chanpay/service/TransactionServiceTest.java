@@ -7,6 +7,7 @@ import me.jiangcai.chanpay.data.pay.PayRequest;
 import me.jiangcai.chanpay.data.pay.QueryTrade;
 import me.jiangcai.chanpay.data.pay.QueryTradeResult;
 import me.jiangcai.chanpay.data.pay.support.PayChannel;
+import me.jiangcai.chanpay.exception.ServiceException;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
 import me.jiangcai.chanpay.model.PayType;
@@ -62,10 +63,18 @@ public class TransactionServiceTest extends AbstractTestBase {
         request.setPayMethod("1");
         request.setPayType(new PayType(CardType.GC, CardAttribute.C));
         request.setReturnPayUrl(true);
-        url = transactionService.execute(request, new InstantTradeHandler());
-        System.out.println(url);
-        assertThat(url)
-                .isNotEmpty();
+        try {
+            url = transactionService.execute(request, new InstantTradeHandler());
+            throw new AssertionError("应当跑错");
+        } catch (ServiceException ex) {
+            assertThat(ex.getMessage())
+                    .isEqualTo("支付方式错误:支付备注错误:WXPAY,C,GC");
+            assertThat(ex.getCode())
+                    .isEqualTo("ILLEGAL_PAY_ERROR");
+        }
+//        System.out.println(url);
+//        assertThat(url)
+//                .isNotEmpty();
     }
 
     @Test
