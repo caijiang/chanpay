@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "POST",
+    "uri": "/wxtest/1",
+    "url": "http://wxtest.jiangcai.me/wxtest/1",
+    "content": "notify_time=20160928151317&sign_type=RSA&notify_type=trade_status_sync&trade_status=TRADE_FINISHED&gmt_payment=20160928151318&version=1.0&sign=vuHZT4S7E0DjPUYDNDAIxzIeAcj47lYkEF%2B6NWDERV8Fpdc3nuDkItdUGfYS4xRg%2BIMxDV2rPXh32yUsymZm7VC4%2B4Xq161XBnW3YGMabcQ%2FSKH37EcSdVGog5jfDzr8vtnuM%2BENWZHDYnTTMSr6lqLuVxzUzR11iDXlgHxZNKM%3D&extension=%7B%7D&gmt_create=20160928151317&_input_charset=UTF-8&outer_trade_no=e18f553287bd43baa879b1a006c186b2&trade_amount=0.01&inner_trade_no=101147504674648472821&notify_id=bba5d901c35b437d80a52add621bc04f",
+    "parameters": [],
+    "headers": [
+      {
+        "name": "content-length",
+        "value": "537"
+      },
+      {
+        "name": "content-type",
+        "value": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      {
+        "name": "host",
+        "value": "wxtest.jiangcai.me"
+      },
+      {
+        "name": "connection",
+        "value": "Keep-Alive"
+      },
+      {
+        "name": "user-agent",
+        "value": "Apache-HttpClient/4.3.1 (java 1.5)"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip,deflate"
+      }
+    ]
+  },
+  "handler": null,
+  "modelAndView": null,
+  "response": {
+    "status": 404,
+    "headers": [],
+    "contentType": null
+  }
+}

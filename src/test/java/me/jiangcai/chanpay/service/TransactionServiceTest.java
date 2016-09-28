@@ -8,6 +8,7 @@ import me.jiangcai.chanpay.data.pay.QueryTrade;
 import me.jiangcai.chanpay.data.pay.QueryTradeResult;
 import me.jiangcai.chanpay.data.pay.support.PayChannel;
 import me.jiangcai.chanpay.exception.ServiceException;
+import me.jiangcai.chanpay.mock.MockPay;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
 import me.jiangcai.chanpay.model.PayType;
@@ -15,6 +16,8 @@ import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,8 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author CJ
  */
 public class TransactionServiceTest extends AbstractTestBase {
+    private static final Log log = LogFactory.getLog(TransactionServiceTest.class);
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private MockPay mockPay;
 
     @Test
     public void x23() throws Exception {
@@ -52,7 +58,8 @@ public class TransactionServiceTest extends AbstractTestBase {
         System.out.println(url);
         assertThat(url)
                 .isNotEmpty();
-        // https://tpay.chanpay.com/cashier/index.htm?token=C456656&memberType=1
+
+        mockPay.pay(request.getSerialNumber(), url);
 
         System.out.println("扫码支付");
 
@@ -81,7 +88,8 @@ public class TransactionServiceTest extends AbstractTestBase {
     public void x26() throws IOException, SignatureException {
         CreateInstantTrade request = new CreateInstantTrade();
         initRequest(request);
-        transactionService.execute(request, new InstantTradeHandler());
+        String url = transactionService.execute(request, new InstantTradeHandler());
+        System.out.println(url);
         String tradeNo = request.getSerialNumber();
 
         QueryTrade queryTrade = new QueryTrade();

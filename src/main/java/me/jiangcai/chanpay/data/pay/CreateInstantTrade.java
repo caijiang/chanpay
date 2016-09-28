@@ -79,6 +79,9 @@ public class CreateInstantTrade extends PayRequest implements BusinessSerial, As
     @JsonProperty("is_returnpayurl")
     private boolean returnPayUrl;
 
+    // TODO 注意 payer 几个字段 必填的
+    // payer_truename 付款方姓名 使用提现请求必传
+
     @Override
     public String serviceName() {
         return "cjt_create_instant_trade";

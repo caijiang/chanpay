@@ -6,7 +6,9 @@
 package me.jiangcai.chanpay;
 
 import me.jiangcai.chanpay.config.ChanpayConfig;
+import me.jiangcai.chanpay.mock.MockPay;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ActiveProfiles;
@@ -36,7 +38,10 @@ public abstract class AbstractTestBase {
     @PropertySource("classpath:/cj.properties")
     @Configuration
     static class Config {
-
+        @Bean
+        public MockPay mockPay() {
+            return new MockPay();
+        }
     }
 
 
