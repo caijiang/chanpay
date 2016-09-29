@@ -3,10 +3,10 @@ package me.jiangcai.chanpay.service.impl;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
-import me.jiangcai.chanpay.converter.EncryptSerializer;
 import me.jiangcai.chanpay.data.Request;
 import me.jiangcai.chanpay.data.Response;
 import me.jiangcai.chanpay.data.trade.TradeRequest;
+import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.security.Sign;
 import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.support.ChanpayXmlMapper;
@@ -54,7 +54,7 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionServiceImpl(Environment environment, ApplicationContext context) throws Exception {
         privateKey = environment.getRequiredProperty("chanpay.key.self.private");
         publicKey = environment.getRequiredProperty("chanpay.key.platform.public");
-        EncryptSerializer.encryptors = this::encrypt;
+        EncryptString.encryptors = this::encrypt;
 
         String keyLocation = environment.getRequiredProperty("chanpay.keyStore");
         String keyPass = environment.getRequiredProperty("chanpay.keyPass");

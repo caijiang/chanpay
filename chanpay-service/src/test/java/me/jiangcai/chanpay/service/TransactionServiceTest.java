@@ -9,6 +9,7 @@ import me.jiangcai.chanpay.data.trade.QueryTrade;
 import me.jiangcai.chanpay.data.trade.QueryTradeResult;
 import me.jiangcai.chanpay.data.trade.QuickPayment;
 import me.jiangcai.chanpay.data.trade.TradeRequest;
+import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.data.trade.support.PayChannel;
 import me.jiangcai.chanpay.exception.ServiceException;
 import me.jiangcai.chanpay.model.CardAttribute;
@@ -56,8 +57,8 @@ public class TransactionServiceTest extends AbstractTestBase {
         quickPayment.setBankCode("TESTBANK");
         quickPayment.setPayerName("测试01");
         quickPayment.setPayerBankAccount("6214830215878947");
-        quickPayment.setIdNumber("152801111111111111");
-        quickPayment.setMobilePhone("13511111111");
+        quickPayment.setIdNumber(new EncryptString("152801111111111111"));
+        quickPayment.setMobilePhone(new EncryptString("13511111111"));
         quickPayment.setNotifyUrl("http://dev.chanpay.com/receive.php");
 
         transactionService.execute(quickPayment, null);
@@ -68,7 +69,7 @@ public class TransactionServiceTest extends AbstractTestBase {
         CreateInstantTrade request = new CreateInstantTrade();
         initRequest(request);
         request.setBankCode("WXPAY");
-        request.setPayerName("蒋才");
+        request.setPayerName("测试01");
 
         //        request.setSerialNumber("111111111111");
 //        request.scanPay();
@@ -78,13 +79,15 @@ public class TransactionServiceTest extends AbstractTestBase {
         String url = transactionService.execute(request, new InstantTradeHandler());
 //        mockPay.pay(request.getSerialNumber(), url);
         System.out.println(url);
+        System.out.println("订单:" + request.getSerialNumber());
 
         OrderWithdraw orderWithdraw = new OrderWithdraw();
         initRequest(orderWithdraw);
         orderWithdraw.setOrderNo(request.getSerialNumber());
-        orderWithdraw.setCardNo("1111111");
-        orderWithdraw.setName("蒋才");
+        orderWithdraw.setCardNo(new EncryptString("6214830215878947"));
+        orderWithdraw.setName(new EncryptString("测试01"));
         OrderWithdrawResult result = transactionService.execute(orderWithdraw, new OrderWithdrawResultHandler());
+        System.out.println(result);
         assertThat(result).isNotNull();
         assertThat(result.isAccepted())
                 .isTrue();

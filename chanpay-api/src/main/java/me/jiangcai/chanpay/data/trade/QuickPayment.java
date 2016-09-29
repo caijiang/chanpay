@@ -2,13 +2,12 @@ package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
-import me.jiangcai.chanpay.converter.EncryptSerializer;
 import me.jiangcai.chanpay.data.trade.support.AbstractPayTrade;
+import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
 
@@ -34,30 +33,41 @@ public class QuickPayment extends AbstractPayTrade implements BusinessSerial, As
      * 付款方名称	String	密文，使用RSA 加密。明文长度：90	不可空
      */
     @JsonProperty("payer_name")
-    @JsonSerialize(using = EncryptSerializer.class)
-    private String payerName;
+    private EncryptString payerNameData;
     /**
      * 付款方银行卡号	String	密文，使用RSA 加密。明文长度：50	不可空
      */
     @JsonProperty("payer_card_no")
-    @JsonSerialize(using = EncryptSerializer.class)
-    private String payerBankAccount;
+    private EncryptString payerBankAccountData;
     /**
      * 身份证号	String(20)	密文，使用RSA 加密。明文长度：30	不可空
      */
     @JsonProperty("id_number")
-    @JsonSerialize(using = EncryptSerializer.class)
-    private String idNumber;
+    private EncryptString idNumber;
     /**
      * 手机号	String(20)	密文，使用RSA 加密。明文长度：30	不可空
      */
     @JsonProperty("phone_number")
-    @JsonSerialize(using = EncryptSerializer.class)
-    private String mobilePhone;
+    private EncryptString mobilePhone;
 
     @Override
     public String serviceName() {
         return "cjt_quick_payment";
+    }
+
+    @Override
+    @JsonIgnore
+    public String getPayerName() {
+        return payerNameData.getOrigin();
+    }
+
+    @Override
+    @JsonIgnore
+    public void setPayerName(String name) {
+        if (name == null)
+            payerNameData = null;
+        else
+            payerNameData = new EncryptString(name);
     }
 
     @Override
@@ -70,5 +80,20 @@ public class QuickPayment extends AbstractPayTrade implements BusinessSerial, As
     @JsonIgnore
     public void setPayerBankName(String name) {
 
+    }
+
+    @Override
+    @JsonIgnore
+    public String getPayerBankAccount() {
+        return payerBankAccountData.getOrigin();
+    }
+
+    @Override
+    @JsonIgnore
+    public void setPayerBankAccount(String account) {
+        if (account == null)
+            payerBankAccountData = null;
+        else
+            payerBankAccountData = new EncryptString(account);
     }
 }

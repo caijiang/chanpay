@@ -1,12 +1,11 @@
 package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
-import me.jiangcai.chanpay.converter.EncryptSerializer;
+import me.jiangcai.chanpay.data.trade.support.EncryptString;
 
 /**
  * 2.20 提现
@@ -30,14 +29,12 @@ public class OrderWithdraw extends TradeRequest implements BusinessSerial, Async
      * 银行卡号	String	密文，使用RSA 加密。明文长度：50
      */
     @JsonProperty("bank_card_no")
-    @JsonSerialize(using = EncryptSerializer.class)
-    private String cardNo;
+    private EncryptString cardNo;
     /**
      * 户名	String	密文，使用RSA 加密。明文长度：90
      */
     @JsonProperty("account_name")
-    @JsonSerialize(using = EncryptSerializer.class)
-    private String name;
+    private EncryptString name;
     /**
      * 服务器异步通知页面路径	String(200)	支付平台服务器主动通知商户网站里指定的页面http路径。
      */

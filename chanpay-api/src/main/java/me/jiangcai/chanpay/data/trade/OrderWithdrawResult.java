@@ -1,9 +1,11 @@
 package me.jiangcai.chanpay.data.trade;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import me.jiangcai.chanpay.converter.LocalDateTimeDeserializer;
+import me.jiangcai.chanpay.converter.SuccessDeserializer;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
  * @author CJ
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderWithdrawResult {
     /**
      * 支付平台交易订单号	String(32)	统一凭证交易订单号。
@@ -31,6 +34,7 @@ public class OrderWithdrawResult {
     @JsonProperty("amount")
     private BigDecimal amount;
     @JsonProperty("accept_status")
+    @JsonDeserialize(using = SuccessDeserializer.class)
     private boolean accepted;
     @JsonProperty("accept_time")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
