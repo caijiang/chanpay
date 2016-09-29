@@ -113,19 +113,22 @@ public class MockPay {
 
             // 这个时候就认为是支付成功么? 还是等几秒中 是否看到了支付成功几个字?
             // class = main-txt
-            webDriverWait = new WebDriverWait(driver, 5);
-            webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
-                @Override
-                public boolean apply(WebDriver input) {
-                    WebElement txt = input.findElements(By.className("main-txt"))
-                            .stream()
-                            .filter(WebElement::isDisplayed)
-                            .findFirst().orElse(null);
-                    if (txt == null)
-                        return false;
-                    return txt.getText().contains("支付成功");
-                }
-            });
+
+//            webDriverWait = new WebDriverWait(driver, 5);
+//            webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
+//                @Override
+//                public boolean apply(WebDriver input) {
+//                    input.getWindowHandles()
+//                            .forEach(str -> System.out.println("handle:" + str));
+//                    WebElement txt = input.findElements(By.className("main-txt"))
+//                            .stream()
+//                            .filter(WebElement::isDisplayed)
+//                            .findFirst().orElse(null);
+//                    System.out.println(txt);
+//                    return txt != null && txt.getText().contains("支付成功");
+//                }
+//            });
+
 //            System.out.println(driver.getPageSource());
         } finally {
             driver.close();
