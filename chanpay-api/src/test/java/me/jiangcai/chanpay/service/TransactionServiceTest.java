@@ -8,7 +8,6 @@ import me.jiangcai.chanpay.data.pay.QueryTrade;
 import me.jiangcai.chanpay.data.pay.QueryTradeResult;
 import me.jiangcai.chanpay.data.pay.support.PayChannel;
 import me.jiangcai.chanpay.exception.ServiceException;
-import me.jiangcai.chanpay.mock.MockPay;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
 import me.jiangcai.chanpay.model.PayType;
@@ -16,10 +15,12 @@ import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
+import me.jiangcai.chanpay.test.mock.MockPay;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -31,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author CJ
  */
+@WebAppConfiguration
 public class TransactionServiceTest extends AbstractTestBase {
     private static final Log log = LogFactory.getLog(TransactionServiceTest.class);
     @Autowired
