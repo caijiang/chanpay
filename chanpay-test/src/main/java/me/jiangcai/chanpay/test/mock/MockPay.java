@@ -3,6 +3,8 @@ package me.jiangcai.chanpay.test.mock;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import me.jiangcai.chanpay.event.TradeEvent;
+import me.jiangcai.chanpay.model.TradeStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileName;
@@ -21,6 +23,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.FilterChainProxy;
@@ -35,6 +38,8 @@ import java.io.InputStream;
 import java.net.URLDecoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
@@ -56,8 +61,17 @@ public class MockPay {
     private final String mockNotifyUri;
     private final MockMvc mockMvc;
 
-//    @EventListener
-//    public void trade()
+    private final List<String> successTrades = new ArrayList<>();
+
+    @EventListener
+    public void trade(TradeEvent event) {
+        if (!successTrades.contains(event.getSerialNumber()))
+            log.debug(event.getSerialNumber() + " turn to " + event.getTradeStatus());
+        if (event.getTradeStatus() == TradeStatus.TRADE_SUCCESS) {
+            // 支付成功
+            successTrades.add(event.getSerialNumber());
+        }
+    }
 
     @Autowired
     public MockPay(Environment environment, WebApplicationContext context, FilterChainProxy springSecurityFilter
@@ -90,7 +104,7 @@ public class MockPay {
             logsRoot = null;
         }
 
-        checkFor(null);
+//        checkFor(null);
 
     }
 
@@ -188,22 +202,23 @@ public class MockPay {
             // 这个时候就认为是支付成功么? 还是等几秒中 是否看到了支付成功几个字?
             // class = main-txt
 
-//            webDriverWait = new WebDriverWait(driver, 5);
-//            webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
-//                @Override
-//                public boolean apply(WebDriver input) {
-//                    input.getWindowHandles()
-//                            .forEach(str -> System.out.println("handle:" + str));
-//                    WebElement txt = input.findElements(By.className("main-txt"))
-//                            .stream()
-//                            .filter(WebElement::isDisplayed)
-//                            .findFirst().orElse(null);
-//                    System.out.println(txt);
-//                    return txt != null && txt.getText().contains("支付成功");
-//                }
-//            });
+            webDriverWait = new WebDriverWait(driver, 5);
+            webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
+                @Override
+                public boolean apply(WebDriver input) {
+                    System.out.println(input.getCurrentUrl());
+                    input.getWindowHandles()
+                            .forEach(str -> System.out.println("handle:" + str));
+                    WebElement txt = input.findElements(By.className("main-txt"))
+                            .stream()
+                            .filter(WebElement::isDisplayed)
+                            .findFirst().orElse(null);
+                    System.out.println(txt);
+                    return txt != null && txt.getText().contains("支付成功");
+                }
+            });
 
-//            System.out.println(driver.getPageSource());
+            System.out.println(driver.getPageSource());
 
         } finally {
             driver.close();
@@ -215,12 +230,27 @@ public class MockPay {
     }
 
     private void checkFor(String serialNumber) throws Exception {
-
         if (logsRoot == null) {
             log.debug("can not work in no-web.");
             return;
         }
+        int nextWait = 1;
 
+        // 1 2 4
+        while (true) {
+            tryMVC();
+            if (successTrades.contains(serialNumber))
+                return;
+            if (nextWait > 10) {
+                throw new AssertionError("没有收到成功支付的接口调用");
+            }
+            Thread.sleep(nextWait * 1000);
+            nextWait = nextWait << 1;
+        }
+
+    }
+
+    private void tryMVC() throws Exception {
         String folderName = "wx-" + DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now());
 
         FileObject[] files = logsRoot.findFiles(new FileSelector() {

@@ -59,7 +59,6 @@ public class ChanpayNotifyController {
         try {
             if (RSA.verify(preString, sign, key, "UTF-8")) {
                 // 继续
-                System.out.println("work!!!!");
                 // 判断下是 2.8 还是 2.9
                 AbstractTradeEvent event;
                 if (tradeStatus != null) {

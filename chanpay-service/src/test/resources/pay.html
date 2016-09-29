@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <html>
 <head>
@@ -5,14 +6,10 @@
     <title>
         畅捷支付钱包
     </title>
-    <link rel="stylesheet" type="text/css"
-          href="https://tpay.chanpay.com/static/resources/css/basis.css?version=20140122" media="screen"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://tpay.chanpay.com/static/resources/css/cashier.css?version=20140122" media="screen"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://tpay.chanpay.com/static/resources/css/bank.css?version=20140122" media="screen"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://tpay.chanpay.com/static/resources/jquery/jquery-ui.min.css?version=20140122" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="https://tpay.chanpay.com/static/resources/css/basis.css?version=20140122" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="https://tpay.chanpay.com/static/resources/css/cashier.css?version=20140122" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="https://tpay.chanpay.com/static/resources/css/bank.css?version=20140122" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="https://tpay.chanpay.com/static/resources/jquery/jquery-ui.min.css?version=20140122" media="screen"/>
     <script src="https://tpay.chanpay.com/static/resources/jquery/jquery-1.11.1.min.js">
     </script>
     <script src="https://tpay.chanpay.com/static/resources/jquery/jquery-ui.min.js">
@@ -32,91 +29,28 @@
     <style>
 
         /*底部*/
-        .foot_in {
-            height: 48px;
-            background-color: #ebeef2;
-        }
-
-        .foot_in .foot_con {
-            position: relative;
-            margin: 0 auto;
-            width: 1000px;
-            line-height: 48px;
-            color: #999;
-            text-align: center;
-        }
-
-        .foot_in .foot_con a {
-            margin: 0 5px;
-            color: #999;
-        }
-
-        .foot_in .foot_con a:hover {
-            color: #a40000;
-        }
-
-        .foot_in .down_scroll {
-            display: none;
-            float: right;
-            margin-top: -48px;
-            width: 150px;
-            height: 48px;
-            background-color: #d8dce3;
-            cursor: pointer;
-        }
-
-        .foot_in .scroll_txt {
-            float: left;
-            padding: 6px 0 0 0;
-            width: 112px;
-            height: 32px;
-            line-height: 18px;
-            color: #4f5b5f;
-        }
-
-        .foot_in .down_scroll:hover {
-            background-color: #c8cfda;
-        }
-
-        .foot_in .scroll_d {
-            float: left;
-            width: 38px;
-            height: 48px;
-            background: #c0c5d0;
-        }
-
-        .foot_in .scroll_d span {
-            display: block;
-            margin: 13px 0 0 7px;
-            width: 24px;
-            height: 24px;
-            background: url(../image/index_icobg.png) -160px -99px no-repeat;
-        }
-
-        .foot_in .down_scroll.d_fixed {
-            display: block;
-            position: fixed;
-            bottom: 0;
-            margin-left: 1002px;
-            *margin-left: 505px;
-        }
-
-        .foot_in .lpd2 {
-            letter-spacing: 2px;
-        }
+        .foot_in{ height:48px; background-color:#ebeef2;}
+        .foot_in .foot_con{ position:relative; margin:0 auto; width:1000px; line-height:48px; color:#999;text-align:center;}
+        .foot_in .foot_con a{ margin:0 5px; color:#999;}
+        .foot_in .foot_con a:hover{ color:#a40000;}
+        .foot_in .down_scroll{display:none; float:right; margin-top:-48px; width:150px; height:48px;  background-color:#d8dce3; cursor:pointer;}
+        .foot_in .scroll_txt{ float:left; padding:6px 0 0 0; width:112px;height:32px; line-height:18px;  color:#4f5b5f;}
+        .foot_in .down_scroll:hover{ background-color:#c8cfda;}
+        .foot_in .scroll_d{ float:left; width:38px;height:48px; background:#c0c5d0;}
+        .foot_in .scroll_d span{ display:block; margin:13px 0 0 7px; width:24px; height:24px; background:url(../image/index_icobg.png) -160px -99px no-repeat;}
+        .foot_in .down_scroll.d_fixed{display:block; position:fixed; bottom:0; margin-left:1002px;*margin-left:505px;}
+        .foot_in .lpd2{ letter-spacing:2px;}
 
     </style>
 </head>
 <body style="zoom: 1;">
-<!--S 顶部信息条-->
-<div class="topbar-wrap">
+<!--S 顶部信息条-->    <div class="topbar-wrap">
     <div class="topbar">
         <p class="topbar-info fr">
         </p>
     </div>
 </div>
-<!--E 顶部信息条-->    <!--S 头部-->
-<div class="header-wrap">
+<!--E 顶部信息条-->    <!--S 头部-->    <div class="header-wrap">
     <div class="header">
         <div class="logo">
             <a href="javascript:void(0);">
@@ -128,8 +62,7 @@
         </div>
     </div>
 </div>
-<!--E 头部-->
-<script src="https://tpay.chanpay.com/static/resources/js/safectrl.js?version=20140122">
+<!--E 头部-->    <script src="https://tpay.chanpay.com/static/resources/js/safectrl.js?version=20140122">
 </script>
 <script src="https://tpay.chanpay.com/static/resources/js/safectrl_utils.js?version=20140122">
 </script>
@@ -145,88 +78,86 @@
         }
 
     </style>
-    <!--S 收银台交易详情-->
-    <div class="cashier-topInfo clearfix">
-        <div class="cashier-topInfo-show clearfix">
-            <div class="fl">
-                <p class="topInfo-show-name">
+    <!--S 收银台交易详情-->      <div class="cashier-topInfo clearfix">
+    <div class="cashier-topInfo-show clearfix">
+        <div class="fl">
+            <p class="topInfo-show-name">
 
-                    未知商品
-                </p>
-                <p class="topInfo-show-merchant">
-                    收款商家：
-                    custtest
-                </p>
-            </div>
-            <div class="fr">
-                <p class="topInfo-show-money">
-                    应付金额:
+                未知商品
+            </p>
+            <p class="topInfo-show-merchant">
+                收款商家：
+                custtest
+            </p>
+        </div>
+        <div class="fr">
+            <p class="topInfo-show-money">
+                应付金额:
               <span>
                 0.01
               </span>
-                    元
-                </p>
-                <p class="topInfo-show-more">
-                    订单详情
-                </p>
-            </div>
-        </div>
-        <div id="trade_detail" class="cashier-topInfo-unfold clearfix" style="display:none;">
-            <div class="topInfo-unfold-line">
-            </div>
-            <table class="topInfo-unfold-table">
-                <thead>
-                <tr>
-                    <th>
-                        类型
-                    </th>
-                    <th>
-                        交易信息
-                    </th>
-                    <th>
-                        交易号
-                    </th>
-                    <th>
-                        对方
-                    </th>
-                    <th>
-                        金额
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        即时到帐交易
-                    </td>
-                    <td>
-                        未知商品
-                    </td>
-                    <td>
-                        101147508712353473384
-                    </td>
-                    <td>
-                        custtest
-                    </td>
-                    <td>
-                        0.01 元
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                元
+            </p>
+            <p class="topInfo-show-more">
+                订单详情
+            </p>
         </div>
     </div>
-    <!--E 收银台交易详情-->
-    <script type="text/javascript">
-        //<![CDATA[
+    <div id="trade_detail" class="cashier-topInfo-unfold clearfix" style="display:none;">
+        <div class="topInfo-unfold-line">
+        </div>
+        <table class="topInfo-unfold-table">
+            <thead>
+            <tr>
+                <th>
+                    类型
+                </th>
+                <th>
+                    交易信息
+                </th>
+                <th>
+                    交易号
+                </th>
+                <th>
+                    对方
+                </th>
+                <th>
+                    金额
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    即时到帐交易
+                </td>
+                <td>
+                    未知商品
+                </td>
+                <td>
+                    101147513942183574815
+                </td>
+                <td>
+                    custtest
+                </td>
+                <td>
+                    0.01 元
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <!--E 收银台交易详情-->      <script type="text/javascript">
+    //<![CDATA[
 
 
-        $(".topInfo-show-more").click(function (showOrHide) {
-            $("#trade_detail").toggle(showOrHide);
-        });
+    $(".topInfo-show-more").click(function(showOrHide){
+        $("#trade_detail").toggle(showOrHide);
+    });
 
-        //]]>
-    </script>
+    //]]>
+</script>
     <div class="pop-title">
         快捷支付-开通方式-
         综合
@@ -237,9 +168,8 @@
             <!--
          <div>PayInstDomain[instId=112510010,payMode=QPAY,instCode=BOC,dbcr=DC,dbcrList=<null>,companyPersonal=C,accessChannel=WEB,remark=<null>,valid=1,instName=中国银行,isGbk=<null>,instLimit=<null>,ext=<null>,instShow=1,bytime=<null>,bydate=<null>,bymonth=<null>,instShowExt=DEFAULT,icon=BIocn-KJ BOC-KJ,payChannel=25,balance=<null>,instInputAmount=0.01]</div>
            -->        </div>
-        <!--S 收银台弹出框-开通方式-储蓄卡-->
-        <div class="cashier-pop success">
-            <p class="cashier-affirm-info clearfix">
+        <!--S 收银台弹出框-开通方式-储蓄卡-->        <div class="cashier-pop success">
+        <p class="cashier-affirm-info clearfix">
             <span class="affirm-info-tit">
               开通方式：
             </span>
@@ -254,24 +184,24 @@
             <span class="dredge-way-photo">
               <img src="https://tpay.chanpay.com/static/resources/image/shortcutPhoto-icon.png" width="74" height="22"/>
             </span>
-                <a href="/cashier/home.htm?token=C456992&amp;memberType=1" class="dredge-way-return">
-                    选择其他银行卡
-                </a>
+            <a href="/cashier/home.htm?token=C457247&amp;memberType=1" class="dredge-way-return">
+                选择其他银行卡
+            </a>
             <span class="affirm-info-money">
               <em>
                 0.01
               </em>
               元
             </span>
-            </p>
-            <p class="cashier-dredge-line">
-            </p>
-            <form id="payForm" action="/cashier/q/paymentSubmit.htm" method="POST">
-                <input id="sendmsg" name="sendmsg" type="hidden"/>
-                <input id="cardType" name="cardType" type="hidden" value="DC"/>
-                <input id="token" name="token" type="hidden" value="C456992"/>
-                <input id="memberType" name="memberType" type="hidden" value="1"/>
-                <input type="hidden" name="base64Cert" id="base64Cert" value="-----BEGIN CERTIFICATE-----
+        </p>
+        <p class="cashier-dredge-line">
+        </p>
+        <form id="payForm" action="/cashier/q/paymentSubmit.htm" method="POST">
+            <input id="sendmsg" name="sendmsg" type="hidden" disabled="disabled"/>
+            <input id="cardType" name="cardType" type="hidden" value="DC" disabled="disabled"/>
+            <input id="token" name="token" type="hidden" value="C457247" disabled="disabled"/>
+            <input id="memberType" name="memberType" type="hidden" value="1" disabled="disabled"/>
+            <input type="hidden" name="base64Cert" id="base64Cert" value="-----BEGIN CERTIFICATE-----
 MIICCzCCAXQCCQDS3bwzUSZwWTANBgkqhkiG9w0BAQUFADBJMQswCQYDVQQGEwJBVTETMBEGA1UE
 ChMKV0VJSFVJLkNPTTElMCMGA1UECxMcV0VJSFVJIFRlbXBvcmFyeSBDZXJ0aWZpY2F0ZTAgFw0x
 MjA5MjkwMDUzNDJaGA8yMTEyMDkwNTAwNTM0MlowSTELMAkGA1UEBhMCQVUxEzARBgNVBAoTCldF
@@ -283,279 +213,263 @@ vLtaFZb49HOKToh9/562CZlCZz9QNl3OQh+EmFP3tvuTsF0/0vRTM5fkfVXMilBBLiDiCchpY063
 iinV5oDgMjWQ4MfOj5jt2GUXiwsRXMM1Grb4NzSiMrwOEHoB3tm1W7Or/ffvcGF76WyE7fBg9s1s
 YT9xU/6gbkt0IyDuwj0=
 
------END CERTIFICATE-----"/>
-                <input type="hidden" name="encryptType" id="encryptType" value="CMS"/>
-                <input type="hidden" name="certSerialNo" id="certSerialNo" value="${serialNo}"/>
-                <input type="hidden" name="INFO" id="INFO" value="${INFO}"/>
-                <input type="hidden" id="passwdMode" name="passwdMode" value="1"/>
-                <div class="cashier-dredge-info clearfix">
-                    <div class="cashier-info-tips">
-                        请填写信息用于实名身份验证。
-                    </div>
-                    <div class="cashier-group clearfix">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            姓名：
-                        </label>
-                        <div class="group-right success">
-                            <input type="text" name="idName" value="蒋才" id="idName" placeholder="请输入姓名"
-                                   class="pop-inputText w200" data-required="true" data-describedby="idName-description"
-                                   data-pattern="^[\u4E00-\u9FA5]{2,10}$" data-description="idName"/>
-                            <div class="clear">
-                            </div>
-                            <div id="idName-description">
+-----END CERTIFICATE-----" disabled="disabled"/>
+            <input type="hidden" name="encryptType" id="encryptType" value="CMS" disabled="disabled"/>
+            <input type="hidden" name="certSerialNo" id="certSerialNo" value="${serialNo}" disabled="disabled"/>
+            <input type="hidden" name="INFO" id="INFO" value="${INFO}" disabled="disabled"/>
+            <input type="hidden" id="passwdMode" name="passwdMode" value="1" disabled="disabled"/>
+            <div class="cashier-dredge-info clearfix">
+                <div class="cashier-info-tips">
+                    请填写信息用于实名身份验证。
+                </div>
+                <div class="cashier-group clearfix">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        姓名：
+                    </label>
+                    <div class="group-right success">
+                        <input type="text" name="idName" value="蒋才" id="idName" placeholder="请输入姓名" class="pop-inputText w200" data-required="true" data-describedby="idName-description" data-pattern="^[\u4E00-\u9FA5]{2,10}$" data-description="idName" disabled="disabled"/>
+                        <div class="clear">
+                        </div>
+                        <div id="idName-description">
                     <span class="input-ok">
                     </span>
-                            </div>
                         </div>
                     </div>
-                    <div class="cashier-group clearfix">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            身份证号：
-                        </label>
-                        <div class="group-right position-relative success" style="width:600px;">
-                            <input type="text" maxlength="18" name="idCard" value="999999999999999999" id="idCard"
-                                   placeholder="请输入身份证号" class="pop-inputText w200" data-required="true"
-                                   data-describedby="idCard-description"
-                                   data-pattern="^[1-9]([0-9]{14}|([0-9]{17}|[0-9]{16}x))$" data-description="idCard"/>
-                            <div class="clear">
-                            </div>
-                            <div id="idCard-description">
+                </div>
+                <div class="cashier-group clearfix">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        身份证号：
+                    </label>
+                    <div class="group-right position-relative success" style="width:600px;">
+                        <input type="text" maxlength="18" name="idCard" value="999999999999999999" id="idCard" placeholder="请输入身份证号" class="pop-inputText w200" data-required="true" data-describedby="idCard-description" data-pattern="^[1-9]([0-9]{14}|([0-9]{17}|[0-9]{16}x))$" data-description="idCard" disabled="disabled"/>
+                        <div class="clear">
+                        </div>
+                        <div id="idCard-description">
                     <span class="input-ok">
                     </span>
-                            </div>
-                            <div class="idCardTip" style="display: none;">
-                                9999 &amp;nbsp9999 &amp;nbsp9999 &amp;nbsp9999 &amp;nbsp99
-                            </div>
+                        </div>
+                        <div class="idCardTip" style="display: none;">
+                            9999 &amp;nbsp9999 &amp;nbsp9999 &amp;nbsp9999 &amp;nbsp99
                         </div>
                     </div>
-                    <div class="cashier-group clearfix">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            银行卡卡号：
-                        </label>
-                        <div class="group-right position-relative success" style="width:600px;">
-                            <input type="text" id="bankcardnum" name="bankcardnum" maxlength="32" value="9999999999"
-                                   class="pop-inputText w200" placeholder="请输入银行卡号" data-conditional="bankvalide"
-                                   data-required="true" data-describedby="bankcardnum-description"
-                                   data-pattern="^[0-9a-zA-Z\\-]{8,32}$" data-description="bankcardnum"/>
-                            <div class="clear">
-                            </div>
-                            <div id="bankcardnum-description">
+                </div>
+                <div class="cashier-group clearfix">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        银行卡卡号：
+                    </label>
+                    <div class="group-right position-relative success" style="width:600px;">
+                        <input type="text" id="bankcardnum" name="bankcardnum" maxlength="32" value="9999999999" class="pop-inputText w200" placeholder="请输入银行卡号" data-conditional="bankvalide" data-required="true" data-describedby="bankcardnum-description" data-pattern="^[0-9a-zA-Z\\-]{8,32}$" data-description="bankcardnum" disabled="disabled"/>
+                        <div class="clear">
+                        </div>
+                        <div id="bankcardnum-description">
                     <span class="input-ok">
                     </span>
-                            </div>
-                            <div class="bankcardnumTip" style="display: none;">
-                                9999 &amp;nbsp9999 &amp;nbsp99    
-                            </div>
+                        </div>
+                        <div class="bankcardnumTip" style="display: none;">
+                            9999 &amp;nbsp9999 &amp;nbsp99    
                         </div>
                     </div>
-                    <div class="cashier-group clearfix" id="certdate" style="display: none;">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            有效期：
-                        </label>
-                        <div class="group-right success">
-                            <select class="select" style="width:83px;" name="month" id="month">
-                                <option selected="selected">
-                                    1
-                                </option>
-                                <option>
-                                    2
-                                </option>
-                                <option>
-                                    3
-                                </option>
-                                <option>
-                                    4
-                                </option>
-                                <option>
-                                    5
-                                </option>
-                                <option>
-                                    6
-                                </option>
-                                <option>
-                                    7
-                                </option>
-                                <option>
-                                    8
-                                </option>
-                                <option>
-                                    9
-                                </option>
-                                <option>
-                                    10
-                                </option>
-                                <option>
-                                    11
-                                </option>
-                                <option>
-                                    12
-                                </option>
-                            </select>
-                            月
+                </div>
+                <div class="cashier-group clearfix" id="certdate" style="display: none;">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        有效期：
+                    </label>
+                    <div class="group-right success">
+                        <select class="select" style="width:83px;" name="month" id="month">
+                            <option selected="selected">
+                                1
+                            </option>
+                            <option>
+                                2
+                            </option>
+                            <option>
+                                3
+                            </option>
+                            <option>
+                                4
+                            </option>
+                            <option>
+                                5
+                            </option>
+                            <option>
+                                6
+                            </option>
+                            <option>
+                                7
+                            </option>
+                            <option>
+                                8
+                            </option>
+                            <option>
+                                9
+                            </option>
+                            <option>
+                                10
+                            </option>
+                            <option>
+                                11
+                            </option>
+                            <option>
+                                12
+                            </option>
+                        </select>
+                        月
 
-                            <select class="select" style="width:82px;" name="year" id="year">
-                                <option selected="selected">
-                                    2016
-                                </option>
-                                <option>
-                                    2017
-                                </option>
-                                <option>
-                                    2018
-                                </option>
-                                <option>
-                                    2019
-                                </option>
-                                <option>
-                                    2020
-                                </option>
-                                <option>
-                                    2021
-                                </option>
-                                <option>
-                                    2022
-                                </option>
-                                <option>
-                                    2023
-                                </option>
-                                <option>
-                                    2024
-                                </option>
-                                <option>
-                                    2025
-                                </option>
-                                <option>
-                                    2026
-                                </option>
-                                <option>
-                                    2027
-                                </option>
-                                <option>
-                                    2028
-                                </option>
-                                <option>
-                                    2029
-                                </option>
-                                <option>
-                                    2030
-                                </option>
-                            </select>
-                            年
+                        <select class="select" style="width:82px;" name="year" id="year">
+                            <option selected="selected">
+                                2016
+                            </option>
+                            <option>
+                                2017
+                            </option>
+                            <option>
+                                2018
+                            </option>
+                            <option>
+                                2019
+                            </option>
+                            <option>
+                                2020
+                            </option>
+                            <option>
+                                2021
+                            </option>
+                            <option>
+                                2022
+                            </option>
+                            <option>
+                                2023
+                            </option>
+                            <option>
+                                2024
+                            </option>
+                            <option>
+                                2025
+                            </option>
+                            <option>
+                                2026
+                            </option>
+                            <option>
+                                2027
+                            </option>
+                            <option>
+                                2028
+                            </option>
+                            <option>
+                                2029
+                            </option>
+                            <option>
+                                2030
+                            </option>
+                        </select>
+                        年
 
-                            <div class="clear">
-                            </div>
+                        <div class="clear">
                         </div>
                     </div>
-                    <div class="cashier-group clearfix" id="certnum" style="display: none;">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            卡验证码：
-                        </label>
-                        <div class="group-right success">
-                            <input type="text" maxlength="3" name="cvNum" value="" id="cvNum" placeholder="请输入卡背面后三位数"
-                                   class="pop-inputText w200" data-conditional="cvvalide"
-                                   data-describedby="cvNum-description" data-pattern="^\d\d\d$"
-                                   data-description="cvNum"/>
-                            <div class="clear">
-                            </div>
-                            <div id="cvNum-description">
+                </div>
+                <div class="cashier-group clearfix" id="certnum" style="display: none;">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        卡验证码：
+                    </label>
+                    <div class="group-right success">
+                        <input type="text" maxlength="3" name="cvNum" value="" id="cvNum" placeholder="请输入卡背面后三位数" class="pop-inputText w200" data-conditional="cvvalide" data-describedby="cvNum-description" data-pattern="^\d\d\d$" data-description="cvNum" disabled="disabled"/>
+                        <div class="clear">
+                        </div>
+                        <div id="cvNum-description">
                     <span class="input-ok">
                     </span>
-                            </div>
                         </div>
                     </div>
-                    <div class="cashier-group clearfix">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            手机号码：
-                        </label>
-                        <div class="group-right position-relative success" style="width:600px;">
-                            <input type="text" maxlength="11" name="mobile" value="13999999999" id="mobile"
-                                   placeholder="输入银行预留手机号" class="pop-inputText w200" data-required="true"
-                                   data-describedby="mobile-description"
-                                   data-pattern="^(((13[0-9]{1})|(14[0-9]{1})|(17[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$"
-                                   data-description="mobile"/>
-                            <div class="clear">
-                            </div>
-                            <div id="mobile-description">
+                </div>
+                <div class="cashier-group clearfix">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        手机号码：
+                    </label>
+                    <div class="group-right position-relative success" style="width:600px;">
+                        <input type="text" maxlength="11" name="mobile" value="13999999999" id="mobile" placeholder="输入银行预留手机号" class="pop-inputText w200" data-required="true" data-describedby="mobile-description" data-pattern="^(((13[0-9]{1})|(14[0-9]{1})|(17[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$" data-description="mobile" disabled="disabled"/>
+                        <div class="clear">
+                        </div>
+                        <div id="mobile-description">
                     <span class="input-ok">
                     </span>
-                            </div>
-                            <div class="mobileTip" style="display: none;">
-                                1399 &amp;nbsp9999 &amp;nbsp999    
-                            </div>
+                        </div>
+                        <div class="mobileTip" style="display: none;">
+                            1399 &amp;nbsp9999 &amp;nbsp999    
                         </div>
                     </div>
-                    <div class="cashier-group clearfix">
-                        <label class="group-left" for="">
-                            <i class="red">
-                                *
-                            </i>
-                            短信验证码：
-                        </label>
-                        <div class="group-right success">
-                            <input id="msg" name="msg" class="pop-inputText w94" type="text"/>
+                </div>
+                <div class="cashier-group clearfix">
+                    <label class="group-left" for="">
+                        <i class="red">
+                            *
+                        </i>
+                        短信验证码：
+                    </label>
+                    <div class="group-right success">
+                        <input id="msg" name="msg" class="pop-inputText w94" type="text" disabled="disabled"/>
                   <span id="send_msg" class="pop-btnVerify w100 disabled" style="margin-left:-4px;" disabled="disabled">
                     60秒后重新获取
                   </span>
-                            <div class="clear">
-                            </div>
-                            <div id="msg-des" class="tips red">
-                            </div>
+                        <div class="clear">
+                        </div>
+                        <div id="msg-des" class="tips red">
                         </div>
                     </div>
-                    <div class="cashier-agree cashier-group clearfix" style="padding-left:192px;">
-                        <div class="group-right success">
-                            <input id="agreeto1" type="checkbox" class="marr10" value="on"/>
+                </div>
+                <div class="cashier-agree cashier-group clearfix" style="padding-left:192px;">
+                    <div class="group-right success">
+                        <input id="agreeto1" type="checkbox" class="marr10" value="on" disabled="disabled"/>
                   <span>
                     同意
                     <a target="_blank" href="https://tpay.chanpay.com/static/resources/help/help-kjzf-web.html">
                       《快捷支付相关协议》
                     </a>
                   </span>
-                            <div class="clear">
-                            </div>
-                            <div id="agreeto1-description" class="tips red">
-                            </div>
+                        <div class="clear">
+                        </div>
+                        <div id="agreeto1-description" class="tips red">
                         </div>
                     </div>
-                    <!--
-                           <div id="bankAccountNum-description"  class="tips red"></div>
-                           -->
-                    <div id="error-description" class="tips red">
-                    </div>
-                    <div class="cashier-dredge-select-btn">
-                        <button class="btnSub w150" type="button" id="waitsubmit">
-                            确认并开通快捷支付
-                        </button>
-                    </div>
                 </div>
-            </form>
-        </div>
+                <!--
+                       <div id="bankAccountNum-description"  class="tips red"></div>
+                       -->              <div id="error-description" class="tips red">
+            </div>
+                <div class="cashier-dredge-select-btn">
+                    <button class="btnSub w150" type="button" id="waitsubmit">
+                        确认并开通快捷支付
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
         <!--E 收银台弹出框-开通方式-储蓄卡-->      </div>
 </div>
 <script type="text/javascript">
     //<![CDATA[
 
-    $().ready(function () {
+    $().ready(function() {
         dbrc();
-        $("#agreeto1").click(function () {
+        $("#agreeto1").click(function(){
             submit_status();
         });
         $('input').removeAttr("disabled");
@@ -563,50 +477,51 @@ YT9xU/6gbkt0IyDuwj0=
         plugin = WHControl.getPayEdit("payPasswd");
         initPayEdit(plugin);
     });
-    function goHome() {
-        window.location.href = "/cashier/home.htm?token=C456992&memberType=1";
+    function goHome()
+    {
+        window.location.href="/cashier/home.htm?token=C457247&memberType=1";
     }
     var submit_msg = true;
     var submit_final = false;
     var okmsg = '<span class="input-ok"></span>';
     $('#payForm').validate({
         //onKeyup : true,
-        onBlur: true,
-        onChange: true,
-        sendForm: false,
-        valid: function () {
+        onBlur : true,
+        onChange : true,
+        sendForm : false,
+        valid: function() {
             //console.log("validate");
             submit_final = true;
             //console.log("submit_final="+submit_final);
-            if (submit_msg) {
-                if ($("#send_msg").attr("disabled")) {
+            if(submit_msg) {
+                if($("#send_msg").attr("disabled")) {
                     return;
                 }
                 //if(!checkPassword()){
                 //    return;
                 // }
                 $('#send_msg').countDown({
-                    text: "秒后重新获取",
-                    endText: "发送验证码",
-                    isDisabled: true,
-                    count: 60
+                    text:"秒后重新获取",
+                    endText:"发送验证码",
+                    isDisabled:true,
+                    count:60
                 });
                 jQuery.ajax({
                     type: 'POST',
                     dataType: "json",
-                    data: $('#payForm').serialize(),
-                    url: "/cashier/q/paymentSubmit.htm",
-                    success: function (response) {
-                        if (response.success) {
-                            $('input').attr("disabled", "disabled");
+                    data:  $('#payForm').serialize(),
+                    url: "/cashier/q/paymentSubmit.htm" ,
+                    success: function(response) {
+                        if(response.success) {
+                            $('input').attr("disabled","disabled");
                             $('#msg').removeAttr("disabled");
                             $('#agreeto1').removeAttr("disabled");
                             $('#sendmsg').val('true');
                         } else {
                             $('#msg-des').html(response.message);
                         }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    } ,
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
 
                     }
 
@@ -614,37 +529,37 @@ YT9xU/6gbkt0IyDuwj0=
             }
             submit_msg = true;
         },
-        eachValidField: function () {
+        eachValidField : function() {
             $(this).closest('div').removeClass('error').addClass('success');
         },
-        eachInvalidField: function () {
+        eachInvalidField : function() {
             $(this).closest('div').removeClass('success').addClass('error');
         },
-        conditional: {
-            datevalide: function () {
+        conditional : {
+            datevalide : function() {
                 //console.log("datevalide");
                 var cardDate = $(this).val();
-                if (cardDate) {
-                    if (cardDate.length == 4) {
-                        var date = cardDate.substring(2) + cardDate.substring(0, 2);
-                        var d = new Date();
+                if(cardDate) {
+                    if(cardDate.length == 4) {
+                        var date = cardDate.substring(2)+cardDate.substring(0,2);
+                        var d=new Date();
                         var year = d.getFullYear();
                         var month = d.getMonth();
-                        if (parseInt(cardDate.substring(2)) + 2000 > year) {
+                        if(parseInt(cardDate.substring(2)) + 2000 > year) {
                             return true;
-                        } else if (parseInt(cardDate.substring(2)) + 2000 == year) {
-                            if (parseInt(cardDate.substring(0, 2)) >= (month + 1)) {
+                        } else if(parseInt(cardDate.substring(2)) + 2000 == year){
+                            if(parseInt(cardDate.substring(0,2)) >= (month+1)) {
                                 return true;
                             }
                         }
                     }
-                } else if ($("#cardType").val() == "DC") {
+                } else if($("#cardType").val() == "DC") {
                     return true;
                 }
                 return false;
             },
-            bankvalide: function () {
-                if (!$('#bankcardnum').val())return false;
+            bankvalide: function() {
+                if(!$('#bankcardnum').val())return false;
                 return true;
                 /*$.ajax({
                  type: 'POST',
@@ -665,10 +580,10 @@ YT9xU/6gbkt0IyDuwj0=
                  });
                  return result;*/
             },
-            cvvalide: function () {
+            cvvalide: function() {
                 //console.log("cvvalide");
-                if (!$('#cvNum').val()) {
-                    if ($("#cardType").val() == "DC") {
+                if(!$('#cvNum').val() ) {
+                    if($("#cardType").val() == "DC") {
                         return true;
                     } else {
                         return false;
@@ -677,124 +592,124 @@ YT9xU/6gbkt0IyDuwj0=
                 return true;
             }
         },
-        description: {
-            bankcardnum: {
-                required: '<label class="gTips-error">银行卡号不能为空</label>',
-                pattern: '<label class="gTips-error">银行卡号为8-32位数字</label>',
-                conditional: '<label class="gTips-error">此卡号已绑定，请选择其他卡号</label>',
+        description : {
+            bankcardnum : {
+                required : '<label class="gTips-error">银行卡号不能为空</label>',
+                pattern : '<label class="gTips-error">银行卡号为8-32位数字</label>',
+                conditional : '<label class="gTips-error">此卡号已绑定，请选择其他卡号</label>',
                 valid: okmsg
             },
-            idName: {
-                required: '<label class="gTips-error">姓名不能为空</label>',
-                pattern: '<label class="gTips-error">姓名为2-10位汉字</label>',
-                conditional: '<label class="gTips-error">姓名错误</label>',
+            idName : {
+                required : '<label class="gTips-error">姓名不能为空</label>',
+                pattern : '<label class="gTips-error">姓名为2-10位汉字</label>',
+                conditional : '<label class="gTips-error">姓名错误</label>',
                 valid: okmsg
             },
-            idCard: {
-                required: '<label class="gTips-error">身份证号码不能为空</label>',
-                pattern: '<label class="gTips-error">身份证号码应该为15、18位数字</label>',
-                conditional: '<label class="gTips-error">身份证号码应该为15、18位数字</label>',
+            idCard : {
+                required : '<label class="gTips-error">身份证号码不能为空</label>',
+                pattern : '<label class="gTips-error">身份证号码应该为15、18位数字</label>',
+                conditional : '<label class="gTips-error">身份证号码应该为15、18位数字</label>',
                 valid: okmsg
             },
-            cardDate: {
-                required: '<label class="gTips-error">银行卡号有效期不能为空</label>',
-                pattern: '<label class="gTips-error">银行卡号有效期为3位数字</label>',
-                conditional: '<label class="gTips-error">银行卡号有效期错误</label>',
+            cardDate : {
+                required : '<label class="gTips-error">银行卡号有效期不能为空</label>',
+                pattern : '<label class="gTips-error">银行卡号有效期为3位数字</label>',
+                conditional : '<label class="gTips-error">银行卡号有效期错误</label>',
                 valid: okmsg
             },
-            cvNum: {
-                required: '<label class="gTips-error">卡验证码不能为空</label>',
-                pattern: '<label class="gTips-error">卡验证码为3位数字</label>',
-                conditional: '<label class="gTips-error">卡验证码为3位数字</label>',
+            cvNum : {
+                required : '<label class="gTips-error">卡验证码不能为空</label>',
+                pattern : '<label class="gTips-error">卡验证码为3位数字</label>',
+                conditional : '<label class="gTips-error">卡验证码为3位数字</label>',
                 valid: okmsg
             },
-            mobile: {
-                required: '<label class="gTips-error">手机号不能为空</label>',
-                pattern: '<label class="gTips-error">手机号为11位数字</label>',
-                conditional: '<label class="gTips-error">手机号错误</label>',
+            mobile : {
+                required : '<label class="gTips-error">手机号不能为空</label>',
+                pattern : '<label class="gTips-error">手机号为11位数字</label>',
+                conditional : '<label class="gTips-error">手机号错误</label>',
                 valid: okmsg
             },
-            bankMoney: {
-                required: '<label class="gTips-error">亲，您还未输入充值金额，请在输入框中填写充值金额！</label>',
-                pattern: '<label class="gTips-error">金额必须为整数或小数，充值金额请大于0，小于100000，小数点后不超过2位!</label>',
-                conditional: '<label class="gTips-error">金额错误</label>',
+            bankMoney : {
+                required : '<label class="gTips-error">亲，您还未输入充值金额，请在输入框中填写充值金额！</label>',
+                pattern : '<label class="gTips-error">金额必须为整数或小数，充值金额请大于0，小于100000，小数点后不超过2位!</label>',
+                conditional : '<label class="gTips-error">金额错误</label>',
                 valid: okmsg
             },
             agreeto1: {
-                required: '<label class="gTips-error">请确定已阅读快捷支付协议</label>',
+                required : '<label class="gTips-error">请确定已阅读快捷支付协议</label>',
 
                 valid: okmsg
             }
         }
     });
 
-    $("#send_msg").click(function () {
+    $("#send_msg").click(function(){
         //console.log("seng_msg");
         $('input').removeAttr("disabled");
         $('#payForm').submit();
     });
-    $("#waitsubmit").click(function () {
+    $("#waitsubmit").click(function(){
         $.blockUI({
-            timeout: 5000,
+            timeout:5000,
             message: '<img src="https://tpay.chanpay.com/static/resources/image/loading.gif" width="48" height="48" style="z-index:100">',
-            css: {width: '48px', centerX: true, left: '45%', border: 0}
+            css: { width: '48px',centerX: true, left:   '45%', border:0}
         });
 
-        if ($('#waitsubmit').attr("disabled"))return;
+        if($('#waitsubmit').attr("disabled"))return;
         submit_msg = false;
         $('#payForm').submit();
-        if (!checkPassword()) {
+        if(!checkPassword()){
             return;
         }
-        if ($("input[type='checkbox']:checkbox:checked").length < 1) {
+        if($("input[type='checkbox']:checkbox:checked").length<1) {
             $('#agreeto1-description').html('<label  class="gTips-error">请确定已阅读快捷支付协议</label>');
             return false;
         }
         //console.log("submit_final="+submit_final);
-        if (submit_final) {
+        if(submit_final) {
             var hassend = $('#sendmsg').val();
-            if (!hassend) {
+            if(!hassend) {
                 alert("请先发送验证码再提交支付");
                 return;
             }
             submit_final = false;
             var msg = $("#msg").val();
-            if (!msg || msg == null) {
+            if(!msg || msg == null) {
                 alert("验证码不能为空");
-                return;
+                return ;
             }
-            $('#waitsubmit').attr("disabled", "disabled");
+            $('#waitsubmit').attr("disabled","disabled");
             $.ajax({
                 type: 'POST',
                 data: {
                     msg: $("#msg").val(),
-                    token: 'C456992',
+                    token: 'C457247',
                     memberType: '1',
                     passwdMode: $("#passwdMode").val(),
                     passwdKey: $("#passwdKey").val(),
                     passwd: $("#passwd").val()
                 },
-                url: "/cashier/q/waitResult.htm",
-                success: function (response) {
-                    if (response.success) {
+                url: "/cashier/q/waitResult.htm" ,
+                success: function(response) {
+                    if(response.success) {
                         $('#waitsubmit').removeAttr("disabled");
-                        location.href = "/cashier/result/payNotify.htm?notifyToken=" + response.notifyToken + "&memberType=1";
+                        location.href  = "/cashier/result/payNotify.htm?notifyToken="+response.notifyToken+"&memberType=1";
                     } else {
                         $('#waitsubmit').removeAttr("disabled");
-                        if (response.code == "error_num") {
-                            var error = "<label class='gTips-error'>密码输入错误,您还有" + response.message + "次机会</label>";
+                        if(response.code == "error_num"){
+                            var error = "<label class='gTips-error'>密码输入错误,您还有"+response.message+"次机会</label>";
                             $("#passwd_error").html(error);
                             return;
                         }
-                        if (response.code == "error_time") {
-                            var error = "<label class='gTips-error'>支付密码被锁定了,请您" + response.message + "分钟后再试</label>";
+                        if(response.code == "error_time"){
+                            var error = "<label class='gTips-error'>支付密码被锁定了,请您"+response.message+"分钟后再试</label>";
                             $("#passwd_error").html(error);
                             return;
                         }
                         alert(response.message);
                     }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                } ,
+                error:function(XMLHttpRequest, textStatus, errorThrown){
                     $('#waitsubmit').removeAttr("disabled");
                 },
                 dataType: "json"
@@ -803,7 +718,7 @@ YT9xU/6gbkt0IyDuwj0=
     });
 
     function submit_status() {
-        if ($("input[type='checkbox']:checkbox:checked").length > 0) {
+        if($("input[type='checkbox']:checkbox:checked").length>0) {
             $("#waitsubmit").attr("disabled", false).removeClass("btn_qr_disabled");
             $('#agreeto1-description').html("");
         } else {
@@ -813,7 +728,7 @@ YT9xU/6gbkt0IyDuwj0=
     }
     function dbrc() {
         //console.log("DC");
-        if ("DC" == "CC") {
+        if("DC"  == "CC") {
             $("#certdate").show();
             $("#certnum").show();
             $("#cardType").val("CC");
@@ -827,8 +742,9 @@ YT9xU/6gbkt0IyDuwj0=
     }
 
 
-    function checkPassword() {
-        if (false) {
+
+    function checkPassword(){
+        if(false){
             $(".passwd_error,.gTips-error").remove();
             var errMsg = {};
             //modify by magang 2016-04-11 start
@@ -840,12 +756,12 @@ YT9xU/6gbkt0IyDuwj0=
                 $("#passwd_error").html('<label  class="gTips-error">支付密码格式不正确!</label>');
                 return false;
             }
-            var timestamp = new Date().getTime(); //时间戳
-            $.ajax({
-                url: "/cashier/ocx/generateRandomKey.htm?timer=" + timestamp,
-                type: "GET",
-                async: false,
-                success: function (srand_num) {
+            var timestamp=new Date().getTime(); //时间戳
+            $.ajax( {
+                url : "/cashier/ocx/generateRandomKey.htm?timer=" + timestamp,
+                type : "GET",
+                async : false,
+                success : function(srand_num) {
                     pgeditor.pwdSetSk(srand_num);
                 }
             });
@@ -879,83 +795,82 @@ YT9xU/6gbkt0IyDuwj0=
 
 
     //金额大写提示
-    ;
-    (function () {
+    ;(function(){
         var moneyUpperArr = [
-            '零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'
+            '零','壹','贰','叁','肆','伍','陆','柒','捌','玖'
         ]
         var iBitArr = [
-            '分', '角', '元', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿', '拾', '佰', '仟'
+            '分','角','元','拾','佰','仟','万','拾','佰','仟','亿','拾','佰','仟'
         ]
-        if (!$('#bankMoney').size())return;
+        if( !$('#bankMoney').size())return;
         var oMoney = document.getElementById('bankMoney');
         var oMoneyTip = document.getElementsByClassName('moneyNumTip')[0];
-
-        function showUpperMoneyNum() {
-            if (oMoney.value != '' && !isNaN(oMoney.value) && checkMoney(oMoney.value)) {
+        function showUpperMoneyNum(){
+            if(oMoney.value != ''&& !isNaN(oMoney.value) && checkMoney(oMoney.value)){
                 var moneyNum = oMoney.value;
                 var moneyUpperNum = '';
-                if (moneyNum.indexOf('.') >= 0) {
+                if(moneyNum.indexOf('.') >= 0){
                     var iArr = moneyNum.split('.')[0].split('');
                     var fArr = moneyNum.split('.')[1].split('');
-                    if (fArr.length == 1) {
+                    if(fArr.length == 1){
                         fArr.push('0');
                     }
                     var numArr = iArr.concat(fArr);
-                } else {
-                    var numArr = moneyNum.split('').concat(['0', '0']);
+                }else{
+                    var numArr = moneyNum.split('').concat(['0','0']);
                 }
 
-                for (var i = 0; i < numArr.length - 2; i++) {
+                for(var i = 0; i<numArr.length-2; i++){
                     var num = numArr[i];
-                    if (num == 0 && i == numArr.length - 7) {
-                        moneyUpperNum += '万'
-                    } else if (num == 0 && i == numArr.length - 3) {
-                        if (numArr.length == 3) {
+                    if(num == 0 && i == numArr.length-7){
+                        moneyUpperNum+= '万'
+                    }else if(num == 0 && i == numArr.length-3){
+                        if(numArr.length == 3){
 
-                        } else {
-                            moneyUpperNum += '元'
+                        }else{
+                            moneyUpperNum+= '元'
                         }
-                    } else if (num == 0 && numArr[i + 1] != 0 && i != numArr.length - 3) {
-                        moneyUpperNum += moneyUpperArr[num]
-                    } else if (num == 0 && numArr[i + 1] == 0 && i != numArr.length - 3) {
+                    }else if(num == 0 && numArr[i+1] != 0 && i != numArr.length-3){
+                        moneyUpperNum+=moneyUpperArr[num]
+                    }else if(num == 0 && numArr[i+1] == 0 && i != numArr.length-3){
 
-                    } else {
-                        moneyUpperNum += moneyUpperArr[num] + iBitArr[numArr.length - i - 1];
+                    }else{
+                        moneyUpperNum+=moneyUpperArr[num]+iBitArr[numArr.length-i-1];
                     }
                 }
-                for (var i = numArr.length - 2; i < numArr.length; i++) {
+                for(var i = numArr.length-2; i<numArr.length; i++){
                     var num = numArr[i];
-                    if (numArr[i] == 0) {
+                    if(numArr[i] == 0){
 
-                    } else {
-                        moneyUpperNum += moneyUpperArr[num] + iBitArr[numArr.length - i - 1];
+                    }else{
+                        moneyUpperNum+=moneyUpperArr[num]+iBitArr[numArr.length-i-1];
                     }
                 }
 
                 oMoneyTip.innerHTML = moneyUpperNum;
                 oMoneyTip.style.display = 'block';
-            } else {
+            }else{
                 oMoneyTip.style.display = 'none';
             }
         }
-
-        oMoney.oninput = function () {
+        oMoney.oninput = function(){
             showUpperMoneyNum();
         };
-        $('#bankMoney').focus(function () {
+        $('#bankMoney').focus(function(){
             showUpperMoneyNum();
         })
-        $('#bankMoney').blur(function () {
-            $('.moneyNumTip').css('display', 'none');
+        $('#bankMoney').blur(function(){
+            $('.moneyNumTip').css('display','none');
         })
 
         function checkMoney(v) {
-            var a = /^[0-9]*(\.[0-9]{1,2})?$/;
-            if (!a.test(v)) {
+            var a=/^[0-9]*(\.[0-9]{1,2})?$/;
+            if(!a.test(v))
+            {
                 return false;
             }
-            else {
+            else
+            {
                 return true;
             }
         }
@@ -963,50 +878,46 @@ YT9xU/6gbkt0IyDuwj0=
 
     //号码分割提示
 
-    ;
-    (function () {
-        var showSplitNum = function (inputId, tipClass) {
-            if (!$(inputId).size())return;
-            function showIdCardNum() {
+    ;(function(){
+        var showSplitNum = function(inputId,tipClass){
+            if( !$(inputId).size())return;
+            function showIdCardNum(){
                 var value = $(inputId).val();
-                value = value.substring(0, 4) + '&nbsp&nbsp' + value.substring(4, 8) + '&nbsp&nbsp' + value.substring(8, 12) + '&nbsp&nbsp' + value.substring(12, 16) + '&nbsp&nbsp' + value.substring(16, 20);
+                value = value.substring(0,4)+'&nbsp&nbsp'+value.substring(4,8)+'&nbsp&nbsp' +value.substring(8,12)+'&nbsp&nbsp' +value.substring(12,16)+'&nbsp&nbsp' +value.substring(16,20);
 
                 $(tipClass).html(value);
-                if ($.trim($(inputId).val()) != '') {
-                    $(tipClass).css('display', 'block')
-                } else {
-                    $(tipClass).css('display', 'none')
+                if($.trim($(inputId).val()) != ''){
+                    $(tipClass).css('display','block')
+                }else{
+                    $(tipClass).css('display','none')
                 }
             }
-
-            $(inputId).keyup(function () {
+            $(inputId).keyup(function(){
                 showIdCardNum();
             })
-            $(inputId).focus(function () {
+            $(inputId).focus(function(){
                 showIdCardNum();
             })
-            $(inputId).blur(function () {
-                $(tipClass).css('display', 'none');
+            $(inputId).blur(function(){
+                $(tipClass).css('display','none');
             })
         }
-        showSplitNum('#idCard', '.idCardTip')
-        showSplitNum('#bankcardnum', '.bankcardnumTip')
-        showSplitNum('#mobile', '.mobileTip')
+        showSplitNum('#idCard','.idCardTip')
+        showSplitNum('#bankcardnum','.bankcardnumTip')
+        showSplitNum('#mobile','.mobileTip')
     })();
 
 
     //]]>
 </script>
-<!--S 底部-->
-<div class="inside-footer">
+<!--S 底部-->    <div class="inside-footer">
     <ul class="info-link">
         <li>
-            Copyright @2015 畅捷支付 京ICP证130428号 京ICP备13041519号 京公网安备11010802018352号
+            Copyright @2015 畅捷支付 京ICP证130428号  京ICP备13041519号  京公网安备11010802018352号
         </li>
     </ul>
 </div>
-<!--E 底部-->
-<div class="safe_plugin" style="display:none;" id="safePlugin">
+<!--E 底部-->    <div class="safe_plugin" style="display:none;" id="safePlugin">
     <p class="p-txt">
         安装安全控件会对您输入的信息(如密码)进行加密保护，保障您的账户安全。
     </p>
@@ -1033,11 +944,9 @@ YT9xU/6gbkt0IyDuwj0=
 </div>
 <div class="blockUI" style="display:none">
 </div>
-<div class="blockUI blockOverlay"
-     style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; background-color: rgb(0,0,0); opacity: 0; cursor: wait; position: fixed;">
+<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; background-color: rgb(0,0,0); opacity: 0; cursor: wait; position: fixed;">
 </div>
-<div class="blockUI blockMsg blockPage"
-     style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 48px; top: 40%; left: 45%; text-align: center; color: rgb(0,0,0); border: 0px; background-color: rgb(255,255,255); cursor: wait; opacity: 0;">
+<div class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 48px; top: 40%; left: 45%; text-align: center; color: rgb(0,0,0); border: 0px; background-color: rgb(255,255,255); cursor: wait; opacity: 0;">
     <img src="https://tpay.chanpay.com/static/resources/image/loading.gif" width="48" height="48" style="z-index:100"/>
 </div>
 </body>

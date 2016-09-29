@@ -8,7 +8,7 @@
     <Loggers>
         <Logger name="me.jiangcai.chanpay" level="debug"/>
         <Logger name="org.springframework.web" level="debug"/>
-        <Logger name="org.apache.http" level="info"/>
+        <Logger name="org.apache.http.conn" level="debug"/>
 
         <Root level="info">
             <AppenderRef ref="Console"/>
