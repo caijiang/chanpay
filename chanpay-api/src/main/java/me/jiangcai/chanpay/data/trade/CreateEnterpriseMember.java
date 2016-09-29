@@ -1,4 +1,4 @@
-package me.jiangcai.chanpay.data.pay;
+package me.jiangcai.chanpay.data.trade;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CreateEnterpriseMember extends PayRequest {
+public class CreateEnterpriseMember extends TradeRequest {
     private String uid;
 
     @Override

@@ -3,9 +3,10 @@ package me.jiangcai.chanpay.service.impl;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
+import me.jiangcai.chanpay.converter.EncryptSerializer;
 import me.jiangcai.chanpay.data.Request;
 import me.jiangcai.chanpay.data.Response;
-import me.jiangcai.chanpay.data.pay.PayRequest;
+import me.jiangcai.chanpay.data.trade.TradeRequest;
 import me.jiangcai.chanpay.security.Sign;
 import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.support.ChanpayXmlMapper;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SignatureException;
+import java.util.Base64;
 import java.util.UUID;
 
 /**
@@ -44,12 +46,16 @@ public class TransactionServiceImpl implements TransactionService {
      */
     private final String notifyUrl;
     private final String privateKey;
+    private final String publicKey;
     @Autowired
     private Environment environment;
 
     @Autowired
     public TransactionServiceImpl(Environment environment, ApplicationContext context) throws Exception {
         privateKey = environment.getRequiredProperty("chanpay.key.self.private");
+        publicKey = environment.getRequiredProperty("chanpay.key.platform.public");
+        EncryptSerializer.encryptors = this::encrypt;
+
         String keyLocation = environment.getRequiredProperty("chanpay.keyStore");
         String keyPass = environment.getRequiredProperty("chanpay.keyPass");
         String certificate = environment.getRequiredProperty("chanpay.certificate");
@@ -61,6 +67,22 @@ public class TransactionServiceImpl implements TransactionService {
 
         //
         notifyUrl = environment.getRequiredProperty("chanpay.notify.url");
+    }
+
+    /**
+     * 加密
+     *
+     * @param src 原值
+     * @return RSA加密后的密文
+     */
+    private String encrypt(String src) {
+        try {
+            byte[] bytes = RSA.encryptByPublicKey(src.getBytes("UTF-8"), publicKey);
+//            return Base64.encodeBase64String(bytes);
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     @Override
@@ -97,7 +119,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public <T> T execute(PayRequest request, PayHandler<T> handler) throws IOException, SignatureException {
+    public <T> T execute(TradeRequest request, PayHandler<T> handler) throws IOException, SignatureException {
 
         if (request instanceof BusinessSerial) {
             if (((BusinessSerial) request).getSerialNumber() == null)
@@ -126,7 +148,7 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
-    private void signRequest(PayRequest request) throws IOException, SignatureException {
+    private void signRequest(TradeRequest request) throws IOException, SignatureException {
         request.setSign(null);
         request.setSignType(null);
         String code = request.preString();

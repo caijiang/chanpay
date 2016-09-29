@@ -1,9 +1,10 @@
-package me.jiangcai.chanpay.data.pay;
+package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import me.jiangcai.chanpay.support.ChanpayObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.EntityBuilder;
@@ -11,6 +12,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,9 +27,9 @@ import java.util.stream.Collectors;
  * @author CJ
  */
 @Data
-public abstract class PayRequest {
+public abstract class TradeRequest {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ChanpayObjectMapper();
     /**
      * 签名方式	String(10)	签名方式只支持RSA、MD5	不可空	MD5
      */
@@ -113,7 +116,15 @@ public abstract class PayRequest {
         return EntityBuilder.create()
                 .setContentEncoding("UTF-8")
                 .setParameters(stringStringMap.keySet().stream()
-                        .map(name -> (NameValuePair) new BasicNameValuePair(name, stringStringMap.get(name)))
+                        .map(name -> {
+                            String value = stringStringMap.get(name);
+                            try {
+                                value = URLEncoder.encode(value, "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                throw new InternalError(e);
+                            }
+                            return (NameValuePair) new BasicNameValuePair(name, value);
+                        })
                         .collect(Collectors.toList()))
                 .build();
     }

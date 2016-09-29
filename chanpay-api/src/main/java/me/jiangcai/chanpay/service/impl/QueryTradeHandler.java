@@ -1,7 +1,7 @@
 package me.jiangcai.chanpay.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import me.jiangcai.chanpay.data.pay.QueryTradeResult;
+import me.jiangcai.chanpay.data.trade.QueryTradeResult;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;

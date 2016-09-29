@@ -1,4 +1,4 @@
-package me.jiangcai.chanpay.data.pay;
+package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -12,7 +12,7 @@ import me.jiangcai.chanpay.model.TradeType;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class QueryTrade extends PayRequest implements BusinessSerial {
+public class QueryTrade extends TradeRequest implements BusinessSerial {
 
     /**
      * 外部企业流水号

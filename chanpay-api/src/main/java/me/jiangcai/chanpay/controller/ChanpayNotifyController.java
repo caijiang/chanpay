@@ -1,6 +1,6 @@
 package me.jiangcai.chanpay.controller;
 
-import me.jiangcai.chanpay.data.pay.PayRequest;
+import me.jiangcai.chanpay.data.trade.TradeRequest;
 import me.jiangcai.chanpay.event.AbstractTradeEvent;
 import me.jiangcai.chanpay.event.RefundEvent;
 import me.jiangcai.chanpay.event.TradeEvent;
@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 接受异步通知的控制器,这个方法并没声明{@link org.springframework.web.bind.annotation.RequestMapping},
+ * 它依赖{@link ChanpayHandlerMapping}帮助它通过查找系统属性映射绑定的URI
+ *
  * @author CJ
  */
 @Controller
@@ -55,7 +58,7 @@ public class ChanpayNotifyController {
         requestParameters.remove("sign");
         requestParameters.remove("sign_type");
         //再
-        String preString = PayRequest.preString(requestParameters);
+        String preString = TradeRequest.preString(requestParameters);
         try {
             if (RSA.verify(preString, sign, key, "UTF-8")) {
                 // 继续

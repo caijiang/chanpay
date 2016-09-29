@@ -3,6 +3,7 @@ package me.jiangcai.chanpay.service.impl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.jiangcai.chanpay.exception.ServiceException;
+import me.jiangcai.chanpay.support.ChanpayObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;
@@ -15,7 +16,7 @@ import java.lang.reflect.ParameterizedType;
  */
 public abstract class PayHandler<T> implements ResponseHandler<T> {
 
-    protected static final ObjectMapper objectMapper = new ObjectMapper();
+    protected static final ObjectMapper objectMapper = new ChanpayObjectMapper();
     // {"_input_charset":"UTF-8","error_code":"REQUIRED_FIELD_NOT_EXIST","error_message":"必填字段未填写","is_success":"F","memo":"买家ID类型不能为空"}
 
     protected T classicsResult(JsonNode node) throws IOException {

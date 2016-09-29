@@ -1,4 +1,4 @@
-package me.jiangcai.chanpay.data.pay.support;
+package me.jiangcai.chanpay.data.trade.support;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

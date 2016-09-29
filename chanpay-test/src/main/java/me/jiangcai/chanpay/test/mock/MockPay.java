@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import me.jiangcai.chanpay.event.TradeEvent;
 import me.jiangcai.chanpay.model.TradeStatus;
+import me.jiangcai.chanpay.support.ChanpayObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileName;
@@ -49,6 +50,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 /**
  * 模拟支付,模拟之后 还可以检查服务器的通知记录
+ * 好吧,太理想了,模拟支付还是存在问题的。
  *
  * @author CJ
  */
@@ -56,22 +58,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class MockPay {
 
     private static final Log log = LogFactory.getLog(MockPay.class);
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ChanpayObjectMapper();
     private final FileObject logsRoot;
     private final String mockNotifyUri;
     private final MockMvc mockMvc;
 
     private final List<String> successTrades = new ArrayList<>();
-
-    @EventListener
-    public void trade(TradeEvent event) {
-        if (!successTrades.contains(event.getSerialNumber()))
-            log.debug(event.getSerialNumber() + " turn to " + event.getTradeStatus());
-        if (event.getTradeStatus() == TradeStatus.TRADE_SUCCESS) {
-            // 支付成功
-            successTrades.add(event.getSerialNumber());
-        }
-    }
 
     @Autowired
     public MockPay(Environment environment, WebApplicationContext context, FilterChainProxy springSecurityFilter
@@ -106,6 +98,16 @@ public class MockPay {
 
 //        checkFor(null);
 
+    }
+
+    @EventListener
+    public void trade(TradeEvent event) {
+        if (!successTrades.contains(event.getSerialNumber()))
+            log.debug(event.getSerialNumber() + " turn to " + event.getTradeStatus());
+        if (event.getTradeStatus() == TradeStatus.TRADE_SUCCESS) {
+            // 支付成功
+            successTrades.add(event.getSerialNumber());
+        }
     }
 
     /**

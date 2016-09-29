@@ -18,7 +18,10 @@ public class PayTypeSerializer extends JsonSerializer<PayType> {
         if (value == null)
             gen.writeNull();
         else {
-            gen.writeString(value.getAttribute().name() + "," + value.getType().name());
+            if (value.getType() != null)
+                gen.writeString(value.getAttribute().name() + "," + value.getType().name());
+            else
+                gen.writeString(value.getAttribute().name());
         }
     }
 }

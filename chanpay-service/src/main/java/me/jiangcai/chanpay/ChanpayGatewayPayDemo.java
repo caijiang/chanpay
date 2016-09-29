@@ -236,17 +236,17 @@ public class ChanpayGatewayPayDemo {
     public static void main(String[] args) {
         ChanpayGatewayPayDemo test = new ChanpayGatewayPayDemo();
         // test.cjt_create_instant_tradeORcjt_wap_create_instant_trade();// 2.3单笔支付webORwap
-        test.wxPay();// 微信扫码接口
+//        test.wxPay();// 微信扫码接口
         // test.notifyVerify();// 异步通知验签
         // test.pay2card();// 2.14付款到卡
         // test.everyTradeFile();// 2.11日交易对账文件
         // test.cjt_get_paychannel();// 2.7 查询银行卡列表
-        test.cjt_query_trade();// 2.6 主动查询
+//        test.cjt_query_trade();// 2.6 主动查询
         // test.cjt_view_receipt();// 2.10回单下载
         // test.cjt_fee_trade_file();// 2.13手续费对账文件
         // ////////////////////////////////////////////////////////////////
         // step1 调用2.18 然后订单号复制出来
-        // test.createQPay();// 2.18快捷api
+        test.createQPay();// 2.18快捷api
         // step2 调用2.19，订单号填写刚才复制的
         // test.createQPayConfirm();// 2.19快捷确认
     }
@@ -489,7 +489,7 @@ public class ChanpayGatewayPayDemo {
     /**
      * 2.18快捷支付api cjt_quick_payment
      */
-    public void createQPay() {
+    private void createQPay() {
 
         Map<String, String> origMap = new HashMap<String, String>();
         // 2.1 基本参数
@@ -500,6 +500,9 @@ public class ChanpayGatewayPayDemo {
         // 2.18快捷支付api 业务参数
         String out_trade_no = (UUID.randomUUID().toString()).replace("-", "");
         System.out.println("out_trade_no:\r\n" + out_trade_no);
+// 测试
+        out_trade_no = "123243322";
+// 测试结束
         origMap.put("out_trade_no", out_trade_no);// 订单号
         origMap.put("trade_amount", "2.50");// 金额
         origMap.put("buyer_ip", "10.20.31.88");// 金额
@@ -551,13 +554,17 @@ public class ChanpayGatewayPayDemo {
         // 2.3 单笔支付
         String out_trade_no = (UUID.randomUUID().toString()).replace("-", "");
         System.out.println(out_trade_no);
+///// 测试
+        out_trade_no = "111111111111";
+        origMap.put("payer_truename", "蒋才");
+///// 测试
         origMap.put("out_trade_no", out_trade_no);// 订单号
         origMap.put("pay_method", "1");// 含义看文档 收银台写2 直连网银1
         origMap.put("pay_type", "C,GC");// 含义看文档 连收银台此值为空
         origMap.put("bank_code", "WXPAY");// 含义看文档 跳收银台此值为空，不要再写TESTBANK了
-        origMap.put("is_returnpayurl ", "Y");// 前台跳转url
+        origMap.put("is_returnpayurl", "Y");// 前台跳转url 后面多了一个空格 是正常的 还是笔误?
 
-        origMap.put("trade_amount", "10.00");// 金额
+        origMap.put("trade_amount", "10.0");// 金额
         origMap.put("notify_url", "http://dev.chanpay.com/receive.php");// 前台跳转url
         this.gatewayPost(origMap, charset, MERCHANT_PRIVATE_KEY);
     }

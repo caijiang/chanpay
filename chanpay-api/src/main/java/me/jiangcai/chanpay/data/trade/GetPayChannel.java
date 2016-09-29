@@ -1,4 +1,4 @@
-package me.jiangcai.chanpay.data.pay;
+package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class GetPayChannel extends PayRequest {
+public class GetPayChannel extends TradeRequest {
 
     /**
      * 产品码	String(32)	商户对接支付系统时

@@ -1,4 +1,4 @@
-package me.jiangcai.chanpay.data.pay;
+package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

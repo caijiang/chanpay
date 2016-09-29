@@ -2,7 +2,7 @@ package me.jiangcai.chanpay.service;
 
 import me.jiangcai.chanpay.data.Request;
 import me.jiangcai.chanpay.data.Response;
-import me.jiangcai.chanpay.data.pay.PayRequest;
+import me.jiangcai.chanpay.data.trade.TradeRequest;
 import me.jiangcai.chanpay.exception.ServiceException;
 import me.jiangcai.chanpay.exception.SystemException;
 import me.jiangcai.chanpay.service.impl.PayHandler;
@@ -33,7 +33,7 @@ public interface TransactionService {
     //在线收款
     void createMember(String loginName, String name, String id, String mobile) throws IOException;
 
-    <T> T execute(PayRequest request, PayHandler<T> handler) throws IOException, SignatureException;
+    <T> T execute(TradeRequest request, PayHandler<T> handler) throws IOException, SignatureException;
 
 
 }

@@ -1,19 +1,22 @@
 package me.jiangcai.chanpay.service;
 
 import me.jiangcai.chanpay.AbstractTestBase;
-import me.jiangcai.chanpay.data.pay.CreateInstantTrade;
-import me.jiangcai.chanpay.data.pay.GetPayChannel;
-import me.jiangcai.chanpay.data.pay.PayRequest;
-import me.jiangcai.chanpay.data.pay.QueryTrade;
-import me.jiangcai.chanpay.data.pay.QueryTradeResult;
-import me.jiangcai.chanpay.data.pay.support.PayChannel;
+import me.jiangcai.chanpay.data.trade.CreateInstantTrade;
+import me.jiangcai.chanpay.data.trade.GetPayChannel;
+import me.jiangcai.chanpay.data.trade.OrderWithdraw;
+import me.jiangcai.chanpay.data.trade.OrderWithdrawResult;
+import me.jiangcai.chanpay.data.trade.QueryTrade;
+import me.jiangcai.chanpay.data.trade.QueryTradeResult;
+import me.jiangcai.chanpay.data.trade.QuickPayment;
+import me.jiangcai.chanpay.data.trade.TradeRequest;
+import me.jiangcai.chanpay.data.trade.support.PayChannel;
 import me.jiangcai.chanpay.exception.ServiceException;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
-import me.jiangcai.chanpay.model.PayType;
 import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
+import me.jiangcai.chanpay.service.impl.OrderWithdrawResultHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
 import me.jiangcai.chanpay.test.mock.MockPay;
 import org.apache.commons.logging.Log;
@@ -39,6 +42,55 @@ public class TransactionServiceTest extends AbstractTestBase {
     private TransactionService transactionService;
     @Autowired
     private MockPay mockPay;
+
+    @Test
+    public void x218() throws Exception {
+        QuickPayment quickPayment = new QuickPayment();
+        initRequest(quickPayment);
+
+        quickPayment.setSerialNumber("123243322");
+        quickPayment.setAmount(BigDecimal.valueOf(2.50));
+        quickPayment.setBuyerIp("10.20.31.88");
+        quickPayment.setCardType(CardType.DC);
+        quickPayment.setCardAttribute(CardAttribute.C);
+        quickPayment.setBankCode("TESTBANK");
+        quickPayment.setPayerName("测试01");
+        quickPayment.setPayerBankAccount("6214830215878947");
+        quickPayment.setIdNumber("152801111111111111");
+        quickPayment.setMobilePhone("13511111111");
+        quickPayment.setNotifyUrl("http://dev.chanpay.com/receive.php");
+
+        transactionService.execute(quickPayment, null);
+    }
+
+    @Test
+    public void x220() throws Exception {
+        CreateInstantTrade request = new CreateInstantTrade();
+        initRequest(request);
+        request.setBankCode("WXPAY");
+        request.setPayerName("蒋才");
+
+        //        request.setSerialNumber("111111111111");
+//        request.scanPay();
+//        request.setAmount(BigDecimal.valueOf(10.0D));
+//        request.setNotifyUrl("http://dev.chanpay.com/receive.php");
+
+        String url = transactionService.execute(request, new InstantTradeHandler());
+//        mockPay.pay(request.getSerialNumber(), url);
+        System.out.println(url);
+
+        OrderWithdraw orderWithdraw = new OrderWithdraw();
+        initRequest(orderWithdraw);
+        orderWithdraw.setOrderNo(request.getSerialNumber());
+        orderWithdraw.setCardNo("1111111");
+        orderWithdraw.setName("蒋才");
+        OrderWithdrawResult result = transactionService.execute(orderWithdraw, new OrderWithdrawResultHandler());
+        assertThat(result).isNotNull();
+        assertThat(result.isAccepted())
+                .isTrue();
+
+
+    }
 
     @Test
     public void x23() throws Exception {
@@ -68,10 +120,7 @@ public class TransactionServiceTest extends AbstractTestBase {
         // 试下扫码支付
         request = new CreateInstantTrade();
         initRequest(request);
-        request.setBankCode("WXPAY");
-        request.setPayMethod("1");
-        request.setPayType(new PayType(CardType.GC, CardAttribute.C));
-        request.setReturnPayUrl(true);
+        request.scanPay();
         try {
             url = transactionService.execute(request, new InstantTradeHandler());
             throw new AssertionError("应当跑错");
@@ -130,11 +179,12 @@ public class TransactionServiceTest extends AbstractTestBase {
     // 218 219
 
 
-    private void initRequest(PayRequest request) {
+    private void initRequest(TradeRequest request) {
         request.setPartner("200000400007");
 
         if (request instanceof CreateInstantTrade) {
-            ((CreateInstantTrade) request).setAmount(BigDecimal.valueOf(0.01));
+            if (((CreateInstantTrade) request).getAmount() == null)
+                ((CreateInstantTrade) request).setAmount(BigDecimal.valueOf(0.01));
 //            request.setN
         }
     }
