@@ -24,7 +24,7 @@ public class ChanpayHandlerMapping implements HandlerMapping {
     public ChanpayHandlerMapping(ChanpayNotifyController chanpayNotifyController) {
         HandlerMethod _handler = null;
         for (Method method : chanpayNotifyController.getClass().getMethods()) {
-            if (method.getName().equalsIgnoreCase("notify")) {
+            if (method.getName().equalsIgnoreCase("payNotify")) {
                 _handler = new HandlerMethod(chanpayNotifyController, method);
             }
         }

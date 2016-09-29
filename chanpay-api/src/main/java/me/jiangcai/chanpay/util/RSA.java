@@ -117,18 +117,20 @@ public class RSA {
      * @return 验签结果
      */
     public static boolean verify(String text, String sign, String publicKey, String charset)
-            throws Exception {
-        byte[] keyBytes = Base64.decodeBase64(publicKey);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
-        PublicKey publicK = keyFactory.generatePublic(keySpec);
+            throws SignatureException {
+        try {
+            byte[] keyBytes = Base64.decodeBase64(publicKey);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
+            PublicKey publicK = keyFactory.generatePublic(keySpec);
 
-        Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
-        signature.initVerify(publicK);
-        signature.update(getContentBytes(text, charset));
-        return signature.verify(Base64.decodeBase64(sign));
-
-
+            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
+            signature.initVerify(publicK);
+            signature.update(getContentBytes(text, charset));
+            return signature.verify(Base64.decodeBase64(sign));
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException ex) {
+            throw new SignatureException(ex);
+        }
     }
 
     /**

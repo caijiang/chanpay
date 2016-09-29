@@ -39,7 +39,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -56,6 +55,9 @@ public class MockPay {
     private final FileObject logsRoot;
     private final String mockNotifyUri;
     private final MockMvc mockMvc;
+
+//    @EventListener
+//    public void trade()
 
     @Autowired
     public MockPay(Environment environment, WebApplicationContext context, FilterChainProxy springSecurityFilter
@@ -276,7 +278,7 @@ public class MockPay {
                         }
                     }
                     mockMvc.perform(builder)
-                            .andDo(print())
+//                            .andDo(print())
                             .andExpect(status().isOk());
                 } else
                     throw new IllegalArgumentException(request.get("method").asText() + " is not supported.");

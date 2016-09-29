@@ -10,6 +10,7 @@
     <modules>
         <module>chanpay-api</module>
         <module>chanpay-test</module>
+        <module>chanpay-service</module>
     </modules>
     <packaging>pom</packaging>
 

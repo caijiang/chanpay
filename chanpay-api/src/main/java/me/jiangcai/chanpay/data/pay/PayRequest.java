@@ -54,6 +54,22 @@ public abstract class PayRequest {
      */
     private String memo;
 
+    public static String preString(Map<String, String> map) {
+        List<String> names = map.keySet().stream().collect(Collectors.toList());
+        Collections.sort(names);
+
+        StringBuilder builder = new StringBuilder();
+        names.forEach(name -> {
+            if (builder.length() > 0)
+                builder.append("&");
+            builder.append(name).append("=");
+            //待签名数据应为参数原始值而非URL Encoding之后的值
+            builder.append(map.get(name));
+        });
+
+        return builder.toString();
+    }
+
     /**
      * @return 接口名称
      */
@@ -66,19 +82,7 @@ public abstract class PayRequest {
 
         Map<String, String> stringStringMap = toMap();
 
-        List<String> names = stringStringMap.keySet().stream().collect(Collectors.toList());
-        Collections.sort(names);
-
-        StringBuilder builder = new StringBuilder();
-        names.forEach(name -> {
-            if (builder.length() > 0)
-                builder.append("&");
-            builder.append(name).append("=");
-            //待签名数据应为参数原始值而非URL Encoding之后的值
-            builder.append(stringStringMap.get(name));
-        });
-
-        return builder.toString();
+        return preString(stringStringMap);
     }
 
     private Map<String, String> toMap() throws IOException {
