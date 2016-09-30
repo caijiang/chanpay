@@ -78,7 +78,18 @@ public class CreateInstantTrade extends AbstractPayTrade implements BusinessSeri
         return "cjt_create_instant_trade";
     }
 
+    /**
+     * 2.39 扫码支付需要改哪些参数
+     * demo中2.3接口需要修改如下参数，即可进行扫码支付
+     * 支付方式: 1
+     * 借记贷记,对公/对私: C,GC
+     * 银行简码:WXPAY
+     * 是否同步否返回支付URL:Y
+     * ext1字段，json串增加一个参数[{'subMerchantNo':'畅捷开通好的代理商子商户商户号'}],
+     * 该字段由畅捷为商户开通正式环境之后分配，用于在微信支付时，显示收款商户名称。
+     */
     public void scanPay() {
+        setBankCode("WXPAY");
         setAnonymous(true);
         setPayMethod("1");
         setPayType(new PayType(CardType.GC, CardAttribute.C));

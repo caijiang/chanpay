@@ -556,7 +556,7 @@ public class ChanpayGatewayPayDemo {
         System.out.println(out_trade_no);
 ///// 测试
         out_trade_no = "111111111111";
-        origMap.put("payer_truename", "蒋才");
+        origMap.put("payer_truename", "测试01");
 ///// 测试
         origMap.put("out_trade_no", out_trade_no);// 订单号
         origMap.put("pay_method", "1");// 含义看文档 收银台写2 直连网银1

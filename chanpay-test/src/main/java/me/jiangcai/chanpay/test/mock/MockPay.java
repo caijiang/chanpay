@@ -21,6 +21,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -51,6 +52,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -96,7 +98,7 @@ public class MockPay {
             FileSystemOptions options = new FileSystemOptions();
             SftpFileSystemConfigBuilder.getInstance().setUserDirIsRoot(options, false);
             logsRoot = VFS.getManager().resolveFile(logsUri, options);
-            System.out.println(logsRoot);
+//            System.out.println(logsRoot);
         } else {
             mockMvc = null;
             mockNotifyUri = null;
@@ -185,8 +187,17 @@ public class MockPay {
             WebElement sendMsg = driver.findElement(By.id("send_msg"));
             WebElement submit = driver.findElement(By.id("waitsubmit"));
 
+            assertThat(nameInput).isNotNull();
+            assertThat(idInput).isNotNull();
+            assertThat(accountInput).isNotNull();
+            assertThat(mobileInput).isNotNull();
+            assertThat(codeInput).isNotNull();
+            assertThat(agreeCheck).isNotNull();
+            assertThat(sendMsg).isNotNull();
+            assertThat(submit).isNotNull();
+
             new Actions(driver)
-                    .click(nameInput).sendKeys("蒋才")
+                    .click(nameInput).sendKeys("龙之人")
                     .click(idInput).sendKeys("999999999999999999")
                     .click(accountInput).sendKeys("9999999999")
                     .click(mobileInput).sendKeys("13999999999")
@@ -220,23 +231,23 @@ public class MockPay {
             // 这个时候就认为是支付成功么? 还是等几秒中 是否看到了支付成功几个字?
             // class = main-txt
 
-            System.out.println(driver.getPageSource());
+//            System.out.println(driver.getPageSource());
 
             webDriverWait = new WebDriverWait(driver, 5);
             webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
                 @Override
                 public boolean apply(WebDriver input) {
-//                    JavascriptExecutor executor = (JavascriptExecutor) input;
-//                    executor.executeScript("$.ajaxSetup({async:false});");
-
-                    System.out.println(input.getCurrentUrl());
-
-                    WebElement txt = input.findElements(By.className("main-txt"))
-                            .stream()
-                            .filter(WebElement::isDisplayed)
-                            .findFirst().orElse(null);
-                    System.out.println(txt);
-                    return txt != null && txt.getText().contains("支付成功");
+//                    System.out.println(input.getCurrentUrl());
+                    try {
+                        WebElement txt = input.findElements(By.className("main-txt"))
+                                .stream()
+                                .filter(WebElement::isDisplayed)
+                                .findFirst().orElse(null);
+//                    System.out.println(txt);
+                        return txt != null && txt.getText().contains("支付成功");
+                    } catch (StaleElementReferenceException ignored) {
+                        return false;
+                    }
                 }
             });
 
@@ -309,6 +320,7 @@ public class MockPay {
                 String uri = request.get("uri").asText();
                 if (!uri.equals(mockNotifyUri))
                     continue;
+                json.delete();
                 if (request.get("method").asText().equalsIgnoreCase("post")) {
                     MockHttpServletRequestBuilder builder = post(uri);
                     JsonNode headers = request.get("headers");
