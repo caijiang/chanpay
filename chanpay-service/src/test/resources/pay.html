@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <html>
 <head>
@@ -135,7 +134,7 @@
                     未知商品
                 </td>
                 <td>
-                    101147513942183574815
+                    101147520475070275093
                 </td>
                 <td>
                     custtest
@@ -177,14 +176,14 @@
               <em class="BIocn-KJ BOC-KJ"/>
             </span>
             <span class="affirm-info-type">
-
+              
 					 						储蓄卡
-
+	                				  
             </span>
             <span class="dredge-way-photo">
               <img src="https://tpay.chanpay.com/static/resources/image/shortcutPhoto-icon.png" width="74" height="22"/>
             </span>
-            <a href="/cashier/home.htm?token=C457247&amp;memberType=1" class="dredge-way-return">
+            <a href="/cashier/home.htm?token=C457426&amp;memberType=1" class="dredge-way-return">
                 选择其他银行卡
             </a>
             <span class="affirm-info-money">
@@ -197,10 +196,10 @@
         <p class="cashier-dredge-line">
         </p>
         <form id="payForm" action="/cashier/q/paymentSubmit.htm" method="POST">
-            <input id="sendmsg" name="sendmsg" type="hidden" disabled="disabled"/>
-            <input id="cardType" name="cardType" type="hidden" value="DC" disabled="disabled"/>
-            <input id="token" name="token" type="hidden" value="C457247" disabled="disabled"/>
-            <input id="memberType" name="memberType" type="hidden" value="1" disabled="disabled"/>
+            <input id="sendmsg" name="sendmsg" type="hidden" value="true"/>
+            <input id="cardType" name="cardType" type="hidden" value="DC"/>
+            <input id="token" name="token" type="hidden" value="C457426"/>
+            <input id="memberType" name="memberType" type="hidden" value="1"/>
             <input type="hidden" name="base64Cert" id="base64Cert" value="-----BEGIN CERTIFICATE-----
 MIICCzCCAXQCCQDS3bwzUSZwWTANBgkqhkiG9w0BAQUFADBJMQswCQYDVQQGEwJBVTETMBEGA1UE
 ChMKV0VJSFVJLkNPTTElMCMGA1UECxMcV0VJSFVJIFRlbXBvcmFyeSBDZXJ0aWZpY2F0ZTAgFw0x
@@ -213,11 +212,11 @@ vLtaFZb49HOKToh9/562CZlCZz9QNl3OQh+EmFP3tvuTsF0/0vRTM5fkfVXMilBBLiDiCchpY063
 iinV5oDgMjWQ4MfOj5jt2GUXiwsRXMM1Grb4NzSiMrwOEHoB3tm1W7Or/ffvcGF76WyE7fBg9s1s
 YT9xU/6gbkt0IyDuwj0=
 
------END CERTIFICATE-----" disabled="disabled"/>
-            <input type="hidden" name="encryptType" id="encryptType" value="CMS" disabled="disabled"/>
-            <input type="hidden" name="certSerialNo" id="certSerialNo" value="${serialNo}" disabled="disabled"/>
-            <input type="hidden" name="INFO" id="INFO" value="${INFO}" disabled="disabled"/>
-            <input type="hidden" id="passwdMode" name="passwdMode" value="1" disabled="disabled"/>
+-----END CERTIFICATE-----"/>
+            <input type="hidden" name="encryptType" id="encryptType" value="CMS"/>
+            <input type="hidden" name="certSerialNo" id="certSerialNo" value="${serialNo}"/>
+            <input type="hidden" name="INFO" id="INFO" value="${INFO}"/>
+            <input type="hidden" id="passwdMode" name="passwdMode" value="1"/>
             <div class="cashier-dredge-info clearfix">
                 <div class="cashier-info-tips">
                     请填写信息用于实名身份验证。
@@ -230,7 +229,9 @@ YT9xU/6gbkt0IyDuwj0=
                         姓名：
                     </label>
                     <div class="group-right success">
-                        <input type="text" name="idName" value="蒋才" id="idName" placeholder="请输入姓名" class="pop-inputText w200" data-required="true" data-describedby="idName-description" data-pattern="^[\u4E00-\u9FA5]{2,10}$" data-description="idName" disabled="disabled"/>
+                        <input type="text" name="idName" value="蒋才" id="idName" placeholder="请输入姓名"
+                               class="pop-inputText w200" data-required="true" data-describedby="idName-description"
+                               data-pattern="^[\u4E00-\u9FA5]{2,10}$" data-description="idName"/>
                         <div class="clear">
                         </div>
                         <div id="idName-description">
@@ -247,7 +248,10 @@ YT9xU/6gbkt0IyDuwj0=
                         身份证号：
                     </label>
                     <div class="group-right position-relative success" style="width:600px;">
-                        <input type="text" maxlength="18" name="idCard" value="999999999999999999" id="idCard" placeholder="请输入身份证号" class="pop-inputText w200" data-required="true" data-describedby="idCard-description" data-pattern="^[1-9]([0-9]{14}|([0-9]{17}|[0-9]{16}x))$" data-description="idCard" disabled="disabled"/>
+                        <input type="text" maxlength="18" name="idCard" value="999999999999999999" id="idCard"
+                               placeholder="请输入身份证号" class="pop-inputText w200" data-required="true"
+                               data-describedby="idCard-description"
+                               data-pattern="^[1-9]([0-9]{14}|([0-9]{17}|[0-9]{16}x))$" data-description="idCard"/>
                         <div class="clear">
                         </div>
                         <div id="idCard-description">
@@ -267,7 +271,10 @@ YT9xU/6gbkt0IyDuwj0=
                         银行卡卡号：
                     </label>
                     <div class="group-right position-relative success" style="width:600px;">
-                        <input type="text" id="bankcardnum" name="bankcardnum" maxlength="32" value="9999999999" class="pop-inputText w200" placeholder="请输入银行卡号" data-conditional="bankvalide" data-required="true" data-describedby="bankcardnum-description" data-pattern="^[0-9a-zA-Z\\-]{8,32}$" data-description="bankcardnum" disabled="disabled"/>
+                        <input type="text" id="bankcardnum" name="bankcardnum" maxlength="32" value="9999999999"
+                               class="pop-inputText w200" placeholder="请输入银行卡号" data-conditional="bankvalide"
+                               data-required="true" data-describedby="bankcardnum-description"
+                               data-pattern="^[0-9a-zA-Z\\-]{8,32}$" data-description="bankcardnum"/>
                         <div class="clear">
                         </div>
                         <div id="bankcardnum-description">
@@ -388,7 +395,9 @@ YT9xU/6gbkt0IyDuwj0=
                         卡验证码：
                     </label>
                     <div class="group-right success">
-                        <input type="text" maxlength="3" name="cvNum" value="" id="cvNum" placeholder="请输入卡背面后三位数" class="pop-inputText w200" data-conditional="cvvalide" data-describedby="cvNum-description" data-pattern="^\d\d\d$" data-description="cvNum" disabled="disabled"/>
+                        <input type="text" maxlength="3" name="cvNum" value="" id="cvNum" placeholder="请输入卡背面后三位数"
+                               class="pop-inputText w200" data-conditional="cvvalide"
+                               data-describedby="cvNum-description" data-pattern="^\d\d\d$" data-description="cvNum"/>
                         <div class="clear">
                         </div>
                         <div id="cvNum-description">
@@ -405,7 +414,11 @@ YT9xU/6gbkt0IyDuwj0=
                         手机号码：
                     </label>
                     <div class="group-right position-relative success" style="width:600px;">
-                        <input type="text" maxlength="11" name="mobile" value="13999999999" id="mobile" placeholder="输入银行预留手机号" class="pop-inputText w200" data-required="true" data-describedby="mobile-description" data-pattern="^(((13[0-9]{1})|(14[0-9]{1})|(17[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$" data-description="mobile" disabled="disabled"/>
+                        <input type="text" maxlength="11" name="mobile" value="13999999999" id="mobile"
+                               placeholder="输入银行预留手机号" class="pop-inputText w200" data-required="true"
+                               data-describedby="mobile-description"
+                               data-pattern="^(((13[0-9]{1})|(14[0-9]{1})|(17[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$"
+                               data-description="mobile"/>
                         <div class="clear">
                         </div>
                         <div id="mobile-description">
@@ -425,9 +438,9 @@ YT9xU/6gbkt0IyDuwj0=
                         短信验证码：
                     </label>
                     <div class="group-right success">
-                        <input id="msg" name="msg" class="pop-inputText w94" type="text" disabled="disabled"/>
+                        <input id="msg" name="msg" class="pop-inputText w94" type="text"/>
                   <span id="send_msg" class="pop-btnVerify w100 disabled" style="margin-left:-4px;" disabled="disabled">
-                    60秒后重新获取
+                    59秒后重新获取
                   </span>
                         <div class="clear">
                         </div>
@@ -437,7 +450,7 @@ YT9xU/6gbkt0IyDuwj0=
                 </div>
                 <div class="cashier-agree cashier-group clearfix" style="padding-left:192px;">
                     <div class="group-right success">
-                        <input id="agreeto1" type="checkbox" class="marr10" value="on" disabled="disabled"/>
+                        <input id="agreeto1" type="checkbox" class="marr10" value="on"/>
                   <span>
                     同意
                     <a target="_blank" href="https://tpay.chanpay.com/static/resources/help/help-kjzf-web.html">
@@ -479,7 +492,7 @@ YT9xU/6gbkt0IyDuwj0=
     });
     function goHome()
     {
-        window.location.href="/cashier/home.htm?token=C457247&memberType=1";
+        window.location.href = "/cashier/home.htm?token=C457426&memberType=1";
     }
     var submit_msg = true;
     var submit_final = false;
@@ -683,7 +696,7 @@ YT9xU/6gbkt0IyDuwj0=
                 type: 'POST',
                 data: {
                     msg: $("#msg").val(),
-                    token: 'C457247',
+                    token: 'C457426',
                     memberType: '1',
                     passwdMode: $("#passwdMode").val(),
                     passwdKey: $("#passwdKey").val(),
@@ -923,7 +936,7 @@ YT9xU/6gbkt0IyDuwj0=
     </p>
     <p class="p-txt mt15">
         <span class="red">
-          安装完成后，请重启浏览器。
+          安装完成后，请重启浏览器。 
         </span>
     </p>
     <p class="p-txt mt15">
@@ -938,15 +951,17 @@ YT9xU/6gbkt0IyDuwj0=
     </p>
     <p class="p-txt mt15">
         <span class="red">
-          对不起，您的IE浏览器是64位的，暂不支持，非常抱歉！
+          对不起，您的IE浏览器是64位的，暂不支持，非常抱歉！ 
         </span>
     </p>
 </div>
 <div class="blockUI" style="display:none">
 </div>
-<div class="blockUI blockOverlay" style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; background-color: rgb(0,0,0); opacity: 0; cursor: wait; position: fixed;">
+<div class="blockUI blockOverlay"
+     style="z-index: 1000; border: none; margin: 0; padding: 0; width: 100%; height: 100%; top: 0; left: 0; background-color: rgb(0,0,0); opacity: 0.494834414499055; cursor: wait; position: fixed;">
 </div>
-<div class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 48px; top: 40%; left: 45%; text-align: center; color: rgb(0,0,0); border: 0px; background-color: rgb(255,255,255); cursor: wait; opacity: 0;">
+<div class="blockUI blockMsg blockPage"
+     style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 48px; top: 40%; left: 45%; text-align: center; color: rgb(0,0,0); border: 0px; background-color: rgb(255,255,255); cursor: wait; opacity: 0.8247240241650917;">
     <img src="https://tpay.chanpay.com/static/resources/image/loading.gif" width="48" height="48" style="z-index:100"/>
 </div>
 </body>

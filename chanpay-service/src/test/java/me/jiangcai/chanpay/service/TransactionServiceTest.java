@@ -62,6 +62,7 @@ public class TransactionServiceTest extends ChanpayTest {
         quickPayment.setNotifyUrl("http://dev.chanpay.com/receive.php");
 
         transactionService.execute(quickPayment, null);
+        // 没有商用计划 所有响应不管了
     }
 
     @Test

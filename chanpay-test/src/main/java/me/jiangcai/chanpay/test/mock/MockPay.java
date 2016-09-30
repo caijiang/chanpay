@@ -17,7 +17,10 @@ import org.apache.commons.vfs2.FileType;
 import org.apache.commons.vfs2.VFS;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
 import org.mockito.MockitoAnnotations;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -132,6 +135,9 @@ public class MockPay {
                 ;
         try {
             driver.get(url);
+//            WebDriverEventListener listener;
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("$.ajaxSetup({async:false});");
             WebElement targetBank = driver.findElement(By.id("bank_list"))
                     .findElements(By.className("card-wrap"))
                     .stream()
@@ -145,6 +151,7 @@ public class MockPay {
                     .click(nextButton)
                     .perform();
 
+            executor.executeScript("$.ajaxSetup({async:false});");
             // 1 寻找错误字段 label class=gTips-error
             // <input type="text" name="idName" value="" id="idName" placeholder="请输入姓名" class="pop-inputText w200" data-required="true" data-describedby="idName-description" data-pattern="^[\u4E00-\u9FA5]{2,10}$" data-description="idName">
             // <input id="agreeto1" type="checkbox" class="marr10" value="on">
@@ -184,6 +191,7 @@ public class MockPay {
                     .click(sendMsg)
                     .perform();
 
+            executor.executeScript("$.ajaxSetup({async:false});");
             WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
             webDriverWait.withTimeout(2, TimeUnit.SECONDS);
             webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
@@ -200,17 +208,27 @@ public class MockPay {
                     .perform();
 
             assertErrors(driver);
+            try {
+                Alert alert = driver.switchTo().alert();
+                throw new AssertionError(alert.getText());
+            } catch (NoAlertPresentException ignored) {
+                //nothing
+            }
 
             // 这个时候就认为是支付成功么? 还是等几秒中 是否看到了支付成功几个字?
             // class = main-txt
+
+            System.out.println(driver.getPageSource());
 
             webDriverWait = new WebDriverWait(driver, 5);
             webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
                 @Override
                 public boolean apply(WebDriver input) {
+                    JavascriptExecutor executor = (JavascriptExecutor) input;
+                    executor.executeScript("$.ajaxSetup({async:false});");
+
                     System.out.println(input.getCurrentUrl());
-                    input.getWindowHandles()
-                            .forEach(str -> System.out.println("handle:" + str));
+
                     WebElement txt = input.findElements(By.className("main-txt"))
                             .stream()
                             .filter(WebElement::isDisplayed)
