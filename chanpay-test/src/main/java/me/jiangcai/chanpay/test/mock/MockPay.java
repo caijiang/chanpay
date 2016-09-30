@@ -29,6 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.stereotype.Service;
@@ -36,10 +37,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -136,8 +140,8 @@ public class MockPay {
         try {
             driver.get(url);
 //            WebDriverEventListener listener;
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("$.ajaxSetup({async:false});");
+
+            batch(driver);
             WebElement targetBank = driver.findElement(By.id("bank_list"))
                     .findElements(By.className("card-wrap"))
                     .stream()
@@ -151,7 +155,7 @@ public class MockPay {
                     .click(nextButton)
                     .perform();
 
-            executor.executeScript("$.ajaxSetup({async:false});");
+            batch(driver);
             // 1 寻找错误字段 label class=gTips-error
             // <input type="text" name="idName" value="" id="idName" placeholder="请输入姓名" class="pop-inputText w200" data-required="true" data-describedby="idName-description" data-pattern="^[\u4E00-\u9FA5]{2,10}$" data-description="idName">
             // <input id="agreeto1" type="checkbox" class="marr10" value="on">
@@ -171,10 +175,8 @@ public class MockPay {
                 String str = element.getAttribute("placeholder");
                 return str != null && str.contains("手机");
             });
-            WebElement codeInput = findInput(driver, element -> {
-                String str = element.getAttribute("placeholder");
-                return str != null && str.contains("输入验证码");
-            });
+            WebElement codeInput = findInput(driver, element -> "msg".equalsIgnoreCase(element.getAttribute("id")));
+
             WebElement agreeCheck = findInput(driver, element -> {
                 String str = element.getAttribute("type");
                 return str.equals("checkbox");
@@ -191,7 +193,7 @@ public class MockPay {
                     .click(sendMsg)
                     .perform();
 
-            executor.executeScript("$.ajaxSetup({async:false});");
+            batch(driver);
             WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
             webDriverWait.withTimeout(2, TimeUnit.SECONDS);
             webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
@@ -224,8 +226,8 @@ public class MockPay {
             webDriverWait.until(new com.google.common.base.Predicate<WebDriver>() {
                 @Override
                 public boolean apply(WebDriver input) {
-                    JavascriptExecutor executor = (JavascriptExecutor) input;
-                    executor.executeScript("$.ajaxSetup({async:false});");
+//                    JavascriptExecutor executor = (JavascriptExecutor) input;
+//                    executor.executeScript("$.ajaxSetup({async:false});");
 
                     System.out.println(input.getCurrentUrl());
 
@@ -238,7 +240,7 @@ public class MockPay {
                 }
             });
 
-            System.out.println(driver.getPageSource());
+//            System.out.println(driver.getPageSource());
 
         } finally {
             driver.close();
@@ -247,6 +249,14 @@ public class MockPay {
         log.debug("driver done");
 
         checkFor(serialNumber);
+    }
+
+    private void batch(WebDriver driver) throws IOException {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        try (InputStream inputStream = new ClassPathResource("batch.js").getInputStream()) {
+            String code = StreamUtils.copyToString(inputStream, Charset.forName("UTF-8"));
+            executor.executeScript(code);
+        }
     }
 
     private void checkFor(String serialNumber) throws Exception {
