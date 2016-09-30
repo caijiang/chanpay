@@ -4,6 +4,7 @@ import me.jiangcai.chanpay.data.Request;
 import me.jiangcai.chanpay.data.Response;
 import me.jiangcai.chanpay.model.AccountProperty;
 import me.jiangcai.chanpay.service.TransactionService;
+import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.test.TestTransaction;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.security.SignatureException;
  *
  * @author CJ
  */
-public class G10001ControllerTest extends AbstractTestBase {
+public class G10001ControllerTest extends ChanpayTest {
 
     @Autowired
     private TransactionService transactionService;

@@ -1,7 +1,7 @@
 package me.jiangcai.chanpay.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import me.jiangcai.chanpay.AbstractTestBase;
+import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.test.FixedData;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author CJ
  */
-public class SignTest extends AbstractTestBase {
+public class SignTest extends ChanpayTest {
 
     @Autowired
     private Environment environment;

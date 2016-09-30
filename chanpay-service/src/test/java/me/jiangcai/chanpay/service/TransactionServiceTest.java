@@ -1,6 +1,5 @@
 package me.jiangcai.chanpay.service;
 
-import me.jiangcai.chanpay.AbstractTestBase;
 import me.jiangcai.chanpay.data.trade.CreateInstantTrade;
 import me.jiangcai.chanpay.data.trade.GetPayChannel;
 import me.jiangcai.chanpay.data.trade.OrderWithdraw;
@@ -19,6 +18,7 @@ import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
 import me.jiangcai.chanpay.service.impl.OrderWithdrawResultHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
+import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.test.mock.MockPay;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author CJ
  */
 @WebAppConfiguration
-public class TransactionServiceTest extends AbstractTestBase {
+public class TransactionServiceTest extends ChanpayTest {
     private static final Log log = LogFactory.getLog(TransactionServiceTest.class);
     @Autowired
     private TransactionService transactionService;
