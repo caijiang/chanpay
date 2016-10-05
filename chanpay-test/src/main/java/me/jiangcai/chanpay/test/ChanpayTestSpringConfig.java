@@ -13,9 +13,10 @@ import org.springframework.web.context.WebApplicationContext;
 /**
  * @author CJ
  */
+@SuppressWarnings("WeakerAccess")
 @PropertySource("classpath:/cj.properties")
 @Configuration
-class ChanpayTestSpringConfig {
+public class ChanpayTestSpringConfig {
     @Autowired
     private Environment environment;
     @Autowired(required = false)
