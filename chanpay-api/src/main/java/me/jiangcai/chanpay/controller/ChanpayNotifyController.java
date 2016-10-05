@@ -44,7 +44,7 @@ public class ChanpayNotifyController {
 
     @ResponseStatus(HttpStatus.OK)
     public void payNotify(@RequestParam("sign") String sign, HttpServletRequest request
-            , @RequestParam("outer_trade_no") String serilNumber
+            , @RequestParam("outer_trade_no") String serialNumber
             , @RequestParam(required = false) String extension
                           // 只存在2.8
             , @RequestParam(value = "trade_status", required = false) TradeStatus tradeStatus
@@ -72,17 +72,17 @@ public class ChanpayNotifyController {
                     event.setAmount(refundAmount);
                 }
 
-                event.setSerialNumber(serilNumber);
+                event.setSerialNumber(serialNumber);
                 event.setExtension(extension);
 
                 applicationEventPublisher.publishEvent(event);
 
             } else
-                throw new IllegalStateException("unknown");
+                throw new IllegalStateException("bad request from Chanpay(sign)");
         } catch (SignatureException e) {
             // 不行!
             log.warn("Sign Verify Failed", e);
-            throw new IllegalStateException("unknown");
+            throw new IllegalStateException("bad request from Chanpay(sign)");
         }
     }
 

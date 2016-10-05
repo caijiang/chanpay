@@ -121,6 +121,8 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public <T> T execute(TradeRequest request, PayHandler<T> handler) throws IOException, SignatureException {
 
+        request.setPartner(environment.getRequiredProperty("chanpay.partner"));
+
         if (request instanceof BusinessSerial) {
             if (((BusinessSerial) request).getSerialNumber() == null)
                 ((BusinessSerial) request).setSerialNumber(UUID.randomUUID().toString().replace("-", ""));
@@ -135,7 +137,7 @@ public class TransactionServiceImpl implements TransactionService {
         signRequest(request);
         try (CloseableHttpClient client = newClient()) {
             // https://tpay.chanpay.com/mag/gateway/receiveOrder.do
-            HttpPost post = new HttpPost("https://tpay.chanpay.com/mag/gateway/receiveOrder.do");
+            HttpPost post = new HttpPost(environment.getRequiredProperty("chanpay.cjt.gateWayUrl"));
 
             post.setEntity(request.toEntity());
 
