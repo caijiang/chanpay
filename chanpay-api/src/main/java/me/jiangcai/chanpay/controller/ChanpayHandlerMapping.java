@@ -1,5 +1,7 @@
 package me.jiangcai.chanpay.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import java.lang.reflect.Method;
  */
 @Component
 public class ChanpayHandlerMapping implements HandlerMapping {
+
+    private static final Log log = LogFactory.getLog(ChanpayHandlerMapping.class);
 
     private final HandlerMethod handler;
     @Autowired
@@ -34,6 +38,10 @@ public class ChanpayHandlerMapping implements HandlerMapping {
 
     @Override
     public HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+        if (log.isDebugEnabled()) {
+            log.debug("incoming:" + request.getRequestURI() + ", require:" + environment.getRequiredProperty("chanpay.notify.uri"));
+        }
+
         if (request.getRequestURI().equalsIgnoreCase(environment.getRequiredProperty("chanpay.notify.uri"))) {
             return new HandlerExecutionChain(handler);
         }
