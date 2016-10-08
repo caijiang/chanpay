@@ -33,6 +33,7 @@ public class ChanpayNotifyController {
 
     private static final Log log = LogFactory.getLog(ChanpayNotifyController.class);
     private final String key;
+    private final boolean verify;
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
@@ -40,6 +41,7 @@ public class ChanpayNotifyController {
     @Autowired
     public ChanpayNotifyController(Environment environment) {
         key = environment.getRequiredProperty("chanpay.key.platform.public");
+        verify = environment.getProperty("chanpay.notify.verify", Boolean.class, true);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -60,7 +62,11 @@ public class ChanpayNotifyController {
         //再
         String preString = TradeRequest.preString(requestParameters);
         try {
-            if (RSA.verify(preString, sign, key, "UTF-8")) {
+
+            log.debug("[CHANPAY][NOTIFY]" + preString);
+            log.debug("[CHANPAY][NOTIFY]" + sign);
+
+            if (!verify || RSA.verify(preString, sign, key, "UTF-8")) {
                 // 继续
                 // 判断下是 2.8 还是 2.9
                 AbstractTradeEvent event;

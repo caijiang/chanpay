@@ -38,6 +38,12 @@ public class ChanpayHandlerMapping implements HandlerMapping {
 
     @Override
     public HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+
+        if (request.getRequestURL().toString().startsWith(environment.getRequiredProperty("chanpay.notify.url"))) {
+            log.debug("check done for chanpay.notify.url");
+            return new HandlerExecutionChain(handler);
+        }
+
         if (log.isDebugEnabled()) {
             log.debug("incoming:" + request.getRequestURI() + ", require:" + environment.getRequiredProperty("chanpay.notify.uri"));
         }
