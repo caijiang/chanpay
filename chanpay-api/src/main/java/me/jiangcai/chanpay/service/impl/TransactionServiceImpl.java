@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SignatureException;
-import java.util.Base64;
 import java.util.UUID;
 
 /**
@@ -78,8 +77,8 @@ public class TransactionServiceImpl implements TransactionService {
     private String encrypt(String src) {
         try {
             byte[] bytes = RSA.encryptByPublicKey(src.getBytes("UTF-8"), publicKey);
-//            return Base64.encodeBase64String(bytes);
-            return Base64.getEncoder().encodeToString(bytes);
+            return org.apache.commons.codec.binary.Base64.encodeBase64String(bytes);
+//            return Base64.getEncoder().encodeToString(bytes);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }

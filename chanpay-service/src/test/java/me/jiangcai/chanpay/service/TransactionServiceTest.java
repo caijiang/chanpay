@@ -1,9 +1,11 @@
 package me.jiangcai.chanpay.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import me.jiangcai.chanpay.data.trade.CreateInstantTrade;
 import me.jiangcai.chanpay.data.trade.GetPayChannel;
 import me.jiangcai.chanpay.data.trade.OrderWithdraw;
 import me.jiangcai.chanpay.data.trade.OrderWithdrawResult;
+import me.jiangcai.chanpay.data.trade.PaymentToCard;
 import me.jiangcai.chanpay.data.trade.QueryTrade;
 import me.jiangcai.chanpay.data.trade.QueryTradeResult;
 import me.jiangcai.chanpay.data.trade.QuickPayment;
@@ -17,11 +19,13 @@ import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
 import me.jiangcai.chanpay.service.impl.OrderWithdrawResultHandler;
+import me.jiangcai.chanpay.service.impl.PayHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
 import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.test.mock.MockPay;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpResponse;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -48,6 +52,31 @@ public class TransactionServiceTest extends ChanpayTest {
      * 一个特有的标记 表示这会儿是真的在跑!!
      */
     private boolean online = false;
+
+    @Test
+    public void x214() throws IOException, SignatureException {
+        PaymentToCard paymentToCard = new PaymentToCard();
+        paymentToCard.setAmount(BigDecimal.valueOf(100));
+
+        paymentToCard.setCardName(new EncryptString("测试01"));
+        paymentToCard.setCardNumber(new EncryptString("6214830215878947"));
+
+        paymentToCard.setBankBranch("中国招商银行上海市浦建路支行");
+        paymentToCard.setBankCode("CMB");
+        paymentToCard.setBankName("招商银行");
+        paymentToCard.setCardAttribute(CardAttribute.C);
+        paymentToCard.setCity("上海市");
+        paymentToCard.setProvince("上海市");
+
+
+        transactionService.execute(paymentToCard, new PayHandler<Object>() {
+            @Override
+            protected Object handleNode(HttpResponse response, JsonNode node) throws IOException {
+                System.out.println(node);
+                return null;
+            }
+        });
+    }
 
     @Test
     public void x218() throws Exception {

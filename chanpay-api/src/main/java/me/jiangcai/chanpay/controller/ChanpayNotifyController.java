@@ -4,21 +4,26 @@ import me.jiangcai.chanpay.data.trade.TradeRequest;
 import me.jiangcai.chanpay.event.AbstractTradeEvent;
 import me.jiangcai.chanpay.event.RefundEvent;
 import me.jiangcai.chanpay.event.TradeEvent;
+import me.jiangcai.chanpay.event.WithdrawalEvent;
 import me.jiangcai.chanpay.model.RefundStatus;
 import me.jiangcai.chanpay.model.TradeStatus;
+import me.jiangcai.chanpay.model.WithdrawalStatus;
 import me.jiangcai.chanpay.util.RSA;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.SignatureException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,15 +50,34 @@ public class ChanpayNotifyController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public void payNotify(@RequestParam("sign") String sign, HttpServletRequest request
+    @ResponseBody
+    public String payNotify(@RequestParam("sign") String sign, HttpServletRequest request
             , @RequestParam("outer_trade_no") String serialNumber
             , @RequestParam(required = false) String extension
-                          // 只存在2.8
+                            // 只存在2.8
             , @RequestParam(value = "trade_status", required = false) TradeStatus tradeStatus
             , @RequestParam(value = "trade_amount", required = false) Number tradeAmount
-                          // 只存在2.9
+//                            gmt_create	交易创建时间	Date	交易创建时间，格式：
+//                                        yyyyMMddHHmmss	不可空	20131101102030
+//                                        gmt_payment	交易支付时间	Date	交易支付时间，格式：
+//                                        yyyyMMddHHmmss	可空	20131101102030
+//                                        gmt_close	交易关闭时间	Date	交易关闭时间，格式：
+//                                        yyyyMMddHHmmss	可空	20131101102030
+                            // 只存在2.9
             , @RequestParam(value = "refund_status", required = false) RefundStatus refundStatus
             , @RequestParam(value = "refund_amount", required = false) Number refundAmount
+//                            gmt_refund	交易退款时间	Date	交易退款时间，格式：
+//                                        yyyyMMddHHmmss	可空
+                            // 只存在2.15
+            , @RequestParam(value = "withdrawal_status", required = false) WithdrawalStatus withdrawalStatus
+            , @RequestParam(value = "withdrawal_amount", required = false) Number withdrawalAmount
+                            // uid	用户ID	String	用户唯一标识	不可空
+            , @RequestParam(value = "uid", required = false) String uid
+            , @RequestParam(value = "return_code", required = false) String notifyCode
+            , @RequestParam(value = "fail_reason", required = false) String failedReson
+            , @RequestParam(value = "gmt_withdrawal", required = false)
+                            @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+                                    LocalDateTime withdrawalTime
     ) {
         //转存为1:1
         Map<String, String> requestParameters = converter(request.getParameterMap());
@@ -73,16 +97,19 @@ public class ChanpayNotifyController {
                 if (tradeStatus != null) {
                     event = new TradeEvent(tradeStatus);
                     event.setAmount(tradeAmount);
-                } else {
+                } else if (refundStatus != null) {
                     event = new RefundEvent(refundStatus);
                     event.setAmount(refundAmount);
+                } else {
+                    event = new WithdrawalEvent(withdrawalStatus);
+                    event.setAmount(withdrawalAmount);
                 }
 
                 event.setSerialNumber(serialNumber);
                 event.setExtension(extension);
 
                 applicationEventPublisher.publishEvent(event);
-
+                return "success";
             } else
                 throw new IllegalStateException("bad request from Chanpay(sign)");
         } catch (SignatureException e) {

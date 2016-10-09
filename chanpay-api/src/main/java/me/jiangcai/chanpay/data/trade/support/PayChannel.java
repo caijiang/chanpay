@@ -1,7 +1,9 @@
 package me.jiangcai.chanpay.data.trade.support;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
+import me.jiangcai.chanpay.converter.CardTypeDeserializer;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
 import me.jiangcai.chanpay.model.PayMode;
@@ -22,6 +24,7 @@ public class PayChannel {
     @JsonProperty("instName")
     private String name;
     @JsonProperty("cardType")
+    @JsonDeserialize(using = CardTypeDeserializer.class)
     private CardType type;
     @JsonProperty("cardAttribute")
     private CardAttribute attribute;

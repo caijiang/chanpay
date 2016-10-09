@@ -13,5 +13,6 @@ public enum PayMode {
      * 快捷支付
      */
     QPAY,
-    POS
+    POS,
+    BALANCE
 }
