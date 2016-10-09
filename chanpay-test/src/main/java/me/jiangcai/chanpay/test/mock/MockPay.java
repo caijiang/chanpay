@@ -6,6 +6,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import me.jiangcai.chanpay.event.TradeEvent;
 import me.jiangcai.chanpay.model.TradeStatus;
 import me.jiangcai.chanpay.support.ChanpayObjectMapper;
+import me.jiangcai.chanpay.test.ChanpayTest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileName;
@@ -31,11 +32,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.MediaType;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.stereotype.Service;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
 import org.springframework.util.StreamUtils;
@@ -43,7 +42,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,8 +51,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
@@ -321,42 +317,12 @@ public class MockPay {
                 if (!uri.equals(mockNotifyUri))
                     continue;
                 json.delete();
-                if (request.get("method").asText().equalsIgnoreCase("post")) {
-                    MockHttpServletRequestBuilder builder = post(uri);
-                    JsonNode headers = request.get("headers");
-                    String contentType = null;
-                    for (JsonNode header : headers) {
-                        String name = header.get("name").asText();
-                        if (name.equals("content-length"))
-                            continue;
-                        if (name.equals("host"))
-                            continue;
-                        String value = header.get("value").asText();
-                        builder = builder.header(name, value);
-                        if (name.equalsIgnoreCase("Content-Type")) {
-                            contentType = value;
-                        }
-                    }
-                    String content = request.get("content").asText();
-                    builder = builder.content(content);
-                    // 这个算是MVC Mock 不足的地方 参数不正确!
-                    if (content != null && contentType != null && MediaType.parseMediaType(contentType).isCompatibleWith(MediaType.APPLICATION_FORM_URLENCODED)) {
-                        String[] paramStrings = content.split("&");
-                        for (String paramString : paramStrings) {
-                            int index = paramString.indexOf("=");
-                            String name = paramString.substring(0, index);
-                            String value = paramString.substring(index + 1);
-                            builder = builder.param(name, URLDecoder.decode(value, "UTF-8"));
-                        }
-                    }
-                    mockMvc.perform(builder)
-//                            .andDo(print())
-                            .andExpect(status().isOk());
-                } else
-                    throw new IllegalArgumentException(request.get("method").asText() + " is not supported.");
+
+                ChanpayTest.MockRequest(mockMvc, request, uri);
             }
         }
     }
+
 
     private void assertErrors(WebDriver driver) {
         driver.findElements(By.className("gTips-error"))
