@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class GetPayChannelHandler extends PayHandler<List<PayChannel>> {
     @Override
-    protected List<PayChannel> handleNode(HttpResponse response, JsonNode node) throws IOException {
+    public List<PayChannel> handleNode(HttpResponse response, JsonNode node) throws IOException {
         JsonNode jsonList = node.get("pay_inst_list");
         ArrayList<PayChannel> list = new ArrayList<>();
 

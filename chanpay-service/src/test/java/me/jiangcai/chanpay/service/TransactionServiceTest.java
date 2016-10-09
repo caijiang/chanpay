@@ -1,6 +1,5 @@
 package me.jiangcai.chanpay.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import me.jiangcai.chanpay.data.trade.CreateInstantTrade;
 import me.jiangcai.chanpay.data.trade.GetPayChannel;
 import me.jiangcai.chanpay.data.trade.OrderWithdraw;
@@ -19,13 +18,11 @@ import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
 import me.jiangcai.chanpay.service.impl.OrderWithdrawResultHandler;
-import me.jiangcai.chanpay.service.impl.PayHandler;
 import me.jiangcai.chanpay.service.impl.QueryTradeHandler;
 import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.test.mock.MockPay;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpResponse;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -69,13 +66,7 @@ public class TransactionServiceTest extends ChanpayTest {
         paymentToCard.setProvince("上海市");
 
 
-        transactionService.execute(paymentToCard, new PayHandler<Object>() {
-            @Override
-            protected Object handleNode(HttpResponse response, JsonNode node) throws IOException {
-                System.out.println(node);
-                return null;
-            }
-        });
+        System.out.println((Boolean) transactionService.execute(paymentToCard, null));
     }
 
     @Test

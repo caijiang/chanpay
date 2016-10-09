@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class OrderWithdrawResultHandler extends PayHandler<OrderWithdrawResult> {
     @Override
-    protected OrderWithdrawResult handleNode(HttpResponse response, JsonNode node) throws IOException {
+    public OrderWithdrawResult handleNode(HttpResponse response, JsonNode node) throws IOException {
         return classicsResult(node);
     }
 }

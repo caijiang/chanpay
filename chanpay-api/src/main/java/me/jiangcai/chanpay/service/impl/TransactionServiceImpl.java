@@ -1,8 +1,10 @@
 package me.jiangcai.chanpay.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
+import me.jiangcai.chanpay.TradeResponseHandler;
 import me.jiangcai.chanpay.data.Request;
 import me.jiangcai.chanpay.data.Response;
 import me.jiangcai.chanpay.data.trade.TradeRequest;
@@ -14,6 +16,7 @@ import me.jiangcai.chanpay.util.RSA;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -141,6 +144,16 @@ public class TransactionServiceImpl implements TransactionService {
             post.setEntity(request.toEntity());
 
             if (handler == null) {
+                if (request instanceof TradeResponseHandler) {
+                    @SuppressWarnings("unchecked")
+                    TradeResponseHandler<T> tradeResponseHandler = (TradeResponseHandler<T>) request;
+                    return client.execute(post, new PayHandler<T>() {
+                        @Override
+                        public T handleNode(HttpResponse response, JsonNode node) throws IOException {
+                            return tradeResponseHandler.handleNode(response, node);
+                        }
+                    });
+                }
                 String response = client.execute(post, new BasicResponseHandler());
                 log.debug("response:" + response);
                 return null;

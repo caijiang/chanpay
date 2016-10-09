@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class QueryTradeHandler extends PayHandler<QueryTradeResult> {
     @Override
-    protected QueryTradeResult handleNode(HttpResponse response, JsonNode node) throws IOException {
+    public QueryTradeResult handleNode(HttpResponse response, JsonNode node) throws IOException {
         return classicsResult(node);
     }
 

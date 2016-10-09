@@ -1,12 +1,17 @@
 package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
+import me.jiangcai.chanpay.TradeResponseHandler;
 import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.model.CardAttribute;
+import org.apache.http.HttpResponse;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
@@ -14,8 +19,10 @@ import java.math.BigDecimal;
  *
  * @author CJ
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class PaymentToCard extends TradeRequest implements BusinessSerial, AsynchronousNotifiable {
+public class PaymentToCard extends TradeRequest implements BusinessSerial, AsynchronousNotifiable
+        , TradeResponseHandler<Boolean> {
 
     /**
      * outer_trade_no	商户网站唯一订单号	String(32)	畅捷支付合作商户网站唯一订单号
@@ -66,5 +73,10 @@ public class PaymentToCard extends TradeRequest implements BusinessSerial, Async
     @Override
     public String serviceName() {
         return "cjt_payment_to_card";
+    }
+
+    @Override
+    public Boolean handleNode(HttpResponse response, JsonNode node) throws IOException {
+        return "T".equalsIgnoreCase(node.get("is_success").asText());
     }
 }
