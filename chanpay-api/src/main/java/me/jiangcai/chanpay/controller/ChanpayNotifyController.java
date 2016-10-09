@@ -53,10 +53,14 @@ public class ChanpayNotifyController {
     @ResponseBody
     public String payNotify(@RequestParam("sign") String sign, HttpServletRequest request
             , @RequestParam("outer_trade_no") String serialNumber
+            , @RequestParam("inner_trade_no") String platformOrderNo //支付平台交易订单号
             , @RequestParam(required = false) String extension
                             // 只存在2.8
             , @RequestParam(value = "trade_status", required = false) TradeStatus tradeStatus
             , @RequestParam(value = "trade_amount", required = false) Number tradeAmount
+            , @RequestParam(value = "gmt_payment", required = false)
+                            @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+                                    LocalDateTime tradeTime
 //                            gmt_create	交易创建时间	Date	交易创建时间，格式：
 //                                        yyyyMMddHHmmss	不可空	20131101102030
 //                                        gmt_payment	交易支付时间	Date	交易支付时间，格式：
@@ -66,15 +70,16 @@ public class ChanpayNotifyController {
                             // 只存在2.9
             , @RequestParam(value = "refund_status", required = false) RefundStatus refundStatus
             , @RequestParam(value = "refund_amount", required = false) Number refundAmount
-//                            gmt_refund	交易退款时间	Date	交易退款时间，格式：
-//                                        yyyyMMddHHmmss	可空
+            , @RequestParam(value = "gmt_refund", required = false)
+                            @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+                                    LocalDateTime refundTime
                             // 只存在2.15
             , @RequestParam(value = "withdrawal_status", required = false) WithdrawalStatus withdrawalStatus
             , @RequestParam(value = "withdrawal_amount", required = false) Number withdrawalAmount
                             // uid	用户ID	String	用户唯一标识	不可空
             , @RequestParam(value = "uid", required = false) String uid
             , @RequestParam(value = "return_code", required = false) String notifyCode
-            , @RequestParam(value = "fail_reason", required = false) String failedReson
+            , @RequestParam(value = "fail_reason", required = false) String failedReason
             , @RequestParam(value = "gmt_withdrawal", required = false)
                             @DateTimeFormat(pattern = "yyyyMMddHHmmss")
                                     LocalDateTime withdrawalTime
@@ -97,16 +102,22 @@ public class ChanpayNotifyController {
                 if (tradeStatus != null) {
                     event = new TradeEvent(tradeStatus);
                     event.setAmount(tradeAmount);
+                    event.setTradeTime(tradeTime);
                 } else if (refundStatus != null) {
                     event = new RefundEvent(refundStatus);
                     event.setAmount(refundAmount);
+                    event.setTradeTime(refundTime);
                 } else {
                     event = new WithdrawalEvent(withdrawalStatus);
                     event.setAmount(withdrawalAmount);
+                    event.setCode(notifyCode);
+                    event.setMessage(failedReason);
+                    event.setTradeTime(withdrawalTime);
                 }
 
                 event.setSerialNumber(serialNumber);
                 event.setExtension(extension);
+                event.setPlatformOrderNo(platformOrderNo);
 
                 applicationEventPublisher.publishEvent(event);
                 return "success";

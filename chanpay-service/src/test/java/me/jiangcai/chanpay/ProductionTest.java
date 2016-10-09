@@ -15,6 +15,7 @@ import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.util.RSA;
 import me.jiangcai.lib.test.SpringWebTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 /**
  * @author CJ
  */
+@Ignore
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ProductionTest.Config.class, ChanpayConfig.class})
@@ -83,6 +85,23 @@ public class ProductionTest extends SpringWebTest {
                 , environment.getRequiredProperty("chanpay.key.platform.public"), "UTF-8");
         assertThat(x)
                 .isTrue();
+    }
+
+    @Test
+    public void otherCard() throws IOException, SignatureException {
+        PaymentToCard paymentToCard = new PaymentToCard();
+        paymentToCard.setAmount(BigDecimal.valueOf(0.1));
+        paymentToCard.setBankBranch("中国建设银行兴安支行");
+        paymentToCard.setBankCode("CCB");
+        paymentToCard.setBankName("中国建设银行");
+        paymentToCard.setCardAttribute(CardAttribute.C);
+        paymentToCard.setCity("杭州市");
+        paymentToCard.setProvince("浙江省");
+        paymentToCard.setCardName(new EncryptString("蒋才"));
+        paymentToCard.setCardNumber(new EncryptString("6236681540007951184"));
+
+        boolean x = transactionService.execute(paymentToCard, null);
+        System.out.println(x);
     }
 
     @Test

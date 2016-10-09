@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -40,7 +41,11 @@ import java.util.UUID;
 public class TransactionServiceImpl implements TransactionService {
 
     private static final Log log = LogFactory.getLog(TransactionServiceImpl.class);
-
+    private static final RequestConfig defaultRequestConfig = RequestConfig.custom()
+            .setConnectTimeout(10000)
+            .setConnectionRequestTimeout(10000)
+            .setSocketTimeout(10000)
+            .build();
     private final Sign sign;
     private final XmlMapper xmlMapper = new ChanpayXmlMapper();
     /**
@@ -175,6 +180,8 @@ public class TransactionServiceImpl implements TransactionService {
     private CloseableHttpClient newClient() {
 
         HttpClientBuilder builder = HttpClientBuilder.create();
+
+        builder = builder.setDefaultRequestConfig(defaultRequestConfig);
 
         if (environment.acceptsProfiles("test")) {
             builder.setSSLHostnameVerifier(new NoopHostnameVerifier());
