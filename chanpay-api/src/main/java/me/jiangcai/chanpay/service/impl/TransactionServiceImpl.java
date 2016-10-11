@@ -42,9 +42,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     private static final Log log = LogFactory.getLog(TransactionServiceImpl.class);
     private static final RequestConfig defaultRequestConfig = RequestConfig.custom()
-            .setConnectTimeout(10000)
-            .setConnectionRequestTimeout(10000)
-            .setSocketTimeout(10000)
+            .setConnectTimeout(30000)
+            .setConnectionRequestTimeout(30000)
+            .setSocketTimeout(30000)
             .build();
     private final Sign sign;
     private final XmlMapper xmlMapper = new ChanpayXmlMapper();

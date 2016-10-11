@@ -18,6 +18,7 @@ import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.util.RSA;
 import me.jiangcai.lib.test.SpringWebTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 /**
  * @author CJ
  */
-//@Ignore
+@Ignore
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ProductionTest.Config.class, ChanpayConfig.class})
@@ -106,7 +107,7 @@ public class ProductionTest extends SpringWebTest {
                 .findAny()
                 .orElse(null));
         paymentToCard.setBank(Dictionary.findByName(Bank.class, "中国建设银行"));
-        paymentToCard.setSubBranch(Dictionary.findByName(SubBranch.class, "中国建设银行兴安支行"));
+        paymentToCard.setSubBranch(Dictionary.findByName(SubBranch.class, "中国建设银行股份有限公司杭州兴安支行"));
 
 
         paymentToCard.setCardAttribute(CardAttribute.C);
@@ -139,7 +140,7 @@ public class ProductionTest extends SpringWebTest {
 //        System.out.println(transactionService.execute(orderWithdraw,new OrderWithdrawResultHandler()));
 
         PaymentToCard paymentToCard = new PaymentToCard();
-        paymentToCard.setAmount(BigDecimal.valueOf(20));
+        paymentToCard.setAmount(BigDecimal.valueOf(0.1));
 
         paymentToCard.setProvince(Dictionary.findByName(Province.class, "浙江省"));
         paymentToCard.setCity(paymentToCard.getProvince().getCityList().stream()
@@ -147,7 +148,7 @@ public class ProductionTest extends SpringWebTest {
                 .findAny()
                 .orElse(null));
         paymentToCard.setBank(Dictionary.findByName(Bank.class, "中国工商银行"));
-        paymentToCard.setSubBranch(Dictionary.findByName(SubBranch.class, "中国工商银行德胜支行"));
+        paymentToCard.setSubBranch(Dictionary.findByName(SubBranch.class, "中国工商银行杭州德胜支行"));
 
 //        paymentToCard.setCity("杭州市");
 //        paymentToCard.setProvince("浙江省");
