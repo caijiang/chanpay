@@ -1,5 +1,6 @@
 package me.jiangcai.chanpay.service;
 
+import me.jiangcai.chanpay.Dictionary;
 import me.jiangcai.chanpay.data.trade.CreateInstantTrade;
 import me.jiangcai.chanpay.data.trade.GetPayChannel;
 import me.jiangcai.chanpay.data.trade.OrderWithdraw;
@@ -12,8 +13,11 @@ import me.jiangcai.chanpay.data.trade.TradeRequest;
 import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.data.trade.support.PayChannel;
 import me.jiangcai.chanpay.exception.ServiceException;
+import me.jiangcai.chanpay.model.Bank;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
+import me.jiangcai.chanpay.model.Province;
+import me.jiangcai.chanpay.model.SubBranch;
 import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.impl.GetPayChannelHandler;
 import me.jiangcai.chanpay.service.impl.InstantTradeHandler;
@@ -58,12 +62,24 @@ public class TransactionServiceTest extends ChanpayTest {
         paymentToCard.setCardName(new EncryptString("测试01"));
         paymentToCard.setCardNumber(new EncryptString("6214830215878947"));
 
-        paymentToCard.setBankBranch("中国招商银行上海市浦建路支行");
-        paymentToCard.setBankCode("CMB");
-        paymentToCard.setBankName("招商银行");
+        paymentToCard.setProvince(Dictionary.findByName(Province.class, "上海市"));
+        paymentToCard.setCity(paymentToCard.getProvince().getCityList().stream()
+                .filter(city -> city.getName().equals("上海市"))
+                .findAny()
+                .orElse(null));
+        paymentToCard.setBank(Dictionary.findByName(Bank.class, "招商银行"));
+
+
+        SubBranch subBranch = new SubBranch();
+        subBranch.setName("中国招商银行上海市浦建路支行");
+        paymentToCard.setSubBranch(subBranch);
+
+//        paymentToCard.setBankBranch("中国招商银行上海市浦建路支行");
+//        paymentToCard.setBankCode("CMB");
+//        paymentToCard.setBankName("招商银行");
+//        paymentToCard.setCity("上海市");
+//        paymentToCard.setProvince("上海市");
         paymentToCard.setCardAttribute(CardAttribute.C);
-        paymentToCard.setCity("上海市");
-        paymentToCard.setProvince("上海市");
 
 
         System.out.println((Boolean) transactionService.execute(paymentToCard, null));

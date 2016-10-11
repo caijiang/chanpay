@@ -1,0 +1,238 @@
+[
+  {
+    "id": "ICBC",
+    "name": "中国工商银行"
+  },
+  {
+    "id": "ABC",
+    "name": "中国农业银行"
+  },
+  {
+    "id": "CMB",
+    "name": "招商银行"
+  },
+  {
+    "id": "COMM",
+    "name": "交通银行"
+  },
+  {
+    "id": "CCB",
+    "name": "中国建设银行"
+  },
+  {
+    "id": "BOC",
+    "name": "中国银行"
+  },
+  {
+    "id": "CEB",
+    "name": "中国光大银行"
+  },
+  {
+    "id": "PSBC",
+    "name": "中国邮政储蓄银行"
+  },
+  {
+    "id": "SPDB",
+    "name": "上海浦东发展银行"
+  },
+  {
+    "id": "CIB",
+    "name": "兴业银行"
+  },
+  {
+    "id": "CMBC",
+    "name": "民生银行"
+  },
+  {
+    "id": "SDE",
+    "name": "顺德农信社"
+  },
+  {
+    "id": "EGBANK",
+    "name": "恒丰银行"
+  },
+  {
+    "id": "HXB",
+    "name": "华夏银行"
+  },
+  {
+    "id": "GDB",
+    "name": "广发银行"
+  },
+  {
+    "id": "SDB",
+    "name": "深圳发展银行"
+  },
+  {
+    "id": "WZCB",
+    "name": "温州市商业银行"
+  },
+  {
+    "id": "HKBCHINA",
+    "name": "汉口银行"
+  },
+  {
+    "id": "TCCB",
+    "name": "天津银行"
+  },
+  {
+    "id": "CSCB",
+    "name": "长沙银行"
+  },
+  {
+    "id": "YDXH",
+    "name": "尧都信用合作联社"
+  },
+  {
+    "id": "HKBEA",
+    "name": "东亚银行"
+  },
+  {
+    "id": "BJRCB",
+    "name": "北京农商行"
+  },
+  {
+    "id": "RCB",
+    "name": "农村商业银行"
+  },
+  {
+    "id": "CZCB",
+    "name": "浙江稠州商业银行"
+  },
+  {
+    "id": "UCC",
+    "name": "城市信用合作社"
+  },
+  {
+    "id": "RCC",
+    "name": "农村信用合作社"
+  },
+  {
+    "id": "GNXS",
+    "name": "广州市农信社"
+  },
+  {
+    "id": "SHRCB",
+    "name": "上海农村商业银行"
+  },
+  {
+    "id": "CQCB",
+    "name": "重庆银行"
+  },
+  {
+    "id": "SNXS",
+    "name": "深圳农村商业银行"
+  },
+  {
+    "id": "URCB",
+    "name": "农村合作银行"
+  },
+  {
+    "id": "BSB",
+    "name": "包商银行"
+  },
+  {
+    "id": "ZZCB",
+    "name": "郑州银行"
+  },
+  {
+    "id": "BOS",
+    "name": "上海银行"
+  },
+  {
+    "id": "HCCB",
+    "name": "杭州银行"
+  },
+  {
+    "id": "JSBC",
+    "name": "江苏银行"
+  },
+  {
+    "id": "HBCB",
+    "name": "哈尔滨银行"
+  },
+  {
+    "id": "CBHB",
+    "name": "渤海银行"
+  },
+  {
+    "id": "SZPAB",
+    "name": "平安银行"
+  },
+  {
+    "id": "BCCB",
+    "name": "北京银行"
+  },
+  {
+    "id": "SXJS",
+    "name": "晋城市商业银行"
+  },
+  {
+    "id": "SDEB",
+    "name": "顺德农信社"
+  },
+  {
+    "id": "NBCB",
+    "name": "宁波银行"
+  },
+  {
+    "id": "CITYBANK",
+    "name": "城市商业银行"
+  },
+  {
+    "id": "COUNTYBANK",
+    "name": "村镇银行"
+  },
+  {
+    "id": "CZB",
+    "name": "浙商银行"
+  },
+  {
+    "id": "ZHNX",
+    "name": "珠海市农村信用合作社"
+  },
+  {
+    "id": "SCB",
+    "name": "渣打银行"
+  },
+  {
+    "id": "HSBANK",
+    "name": "徽商银行"
+  },
+  {
+    "id": "GZCB",
+    "name": "广州市商业银行"
+  },
+  {
+    "id": "CITIC",
+    "name": "中信银行"
+  },
+  {
+    "id": "NJCB",
+    "name": "南京银行"
+  },
+  {
+    "id": "CCQTGB",
+    "name": "重庆三峡银行"
+  },
+  {
+    "id": "CRB",
+    "name": "华润银行"
+  },
+  {
+    "id": "BOCD",
+    "name": "成都银行"
+  },
+  {
+    "id": "HNNXS",
+    "name": "湖南农信社"
+  },
+  {
+    "id": "GDNYB",
+    "name": "南粤银行"
+  },
+  {
+    "id": "CYB",
+    "name": "集友银行"
+  }
+]

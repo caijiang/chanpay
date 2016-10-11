@@ -9,13 +9,15 @@ import me.jiangcai.chanpay.data.trade.PaymentToCard;
 import me.jiangcai.chanpay.data.trade.QueryTrade;
 import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.event.WithdrawalEvent;
+import me.jiangcai.chanpay.model.Bank;
 import me.jiangcai.chanpay.model.CardAttribute;
+import me.jiangcai.chanpay.model.Province;
+import me.jiangcai.chanpay.model.SubBranch;
 import me.jiangcai.chanpay.model.TradeType;
 import me.jiangcai.chanpay.service.TransactionService;
 import me.jiangcai.chanpay.test.ChanpayTest;
 import me.jiangcai.chanpay.util.RSA;
 import me.jiangcai.lib.test.SpringWebTest;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 /**
  * @author CJ
  */
-@Ignore
+//@Ignore
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ProductionTest.Config.class, ChanpayConfig.class})
@@ -91,12 +93,23 @@ public class ProductionTest extends SpringWebTest {
     public void otherCard() throws IOException, SignatureException {
         PaymentToCard paymentToCard = new PaymentToCard();
         paymentToCard.setAmount(BigDecimal.valueOf(0.1));
-        paymentToCard.setBankBranch("中国建设银行兴安支行");
-        paymentToCard.setBankCode("CCB");
-        paymentToCard.setBankName("中国建设银行");
+
+//        paymentToCard.setCity("杭州市");
+//        paymentToCard.setProvince("浙江省");
+//        paymentToCard.setBankBranch("中国建设银行兴安支行");
+//        paymentToCard.setBankCode("CCB");
+//        paymentToCard.setBankName("中国建设银行");
+
+        paymentToCard.setProvince(Dictionary.findByName(Province.class, "浙江省"));
+        paymentToCard.setCity(paymentToCard.getProvince().getCityList().stream()
+                .filter(city -> city.getName().equals("杭州市"))
+                .findAny()
+                .orElse(null));
+        paymentToCard.setBank(Dictionary.findByName(Bank.class, "中国建设银行"));
+        paymentToCard.setSubBranch(Dictionary.findByName(SubBranch.class, "中国建设银行兴安支行"));
+
+
         paymentToCard.setCardAttribute(CardAttribute.C);
-        paymentToCard.setCity("杭州市");
-        paymentToCard.setProvince("浙江省");
         paymentToCard.setCardName(new EncryptString("蒋才"));
         paymentToCard.setCardNumber(new EncryptString("6236681540007951184"));
 
@@ -126,13 +139,24 @@ public class ProductionTest extends SpringWebTest {
 //        System.out.println(transactionService.execute(orderWithdraw,new OrderWithdrawResultHandler()));
 
         PaymentToCard paymentToCard = new PaymentToCard();
-        paymentToCard.setAmount(BigDecimal.valueOf(0.1));
-        paymentToCard.setBankBranch("中国工商银行德胜支行");
-        paymentToCard.setBankCode("ICBC");
-        paymentToCard.setBankName("中国工商银行");
+        paymentToCard.setAmount(BigDecimal.valueOf(20));
+
+        paymentToCard.setProvince(Dictionary.findByName(Province.class, "浙江省"));
+        paymentToCard.setCity(paymentToCard.getProvince().getCityList().stream()
+                .filter(city -> city.getName().equals("杭州市"))
+                .findAny()
+                .orElse(null));
+        paymentToCard.setBank(Dictionary.findByName(Bank.class, "中国工商银行"));
+        paymentToCard.setSubBranch(Dictionary.findByName(SubBranch.class, "中国工商银行德胜支行"));
+
+//        paymentToCard.setCity("杭州市");
+//        paymentToCard.setProvince("浙江省");
+//        paymentToCard.setBankBranch("中国工商银行德胜支行");
+//        paymentToCard.setBankCode("ICBC");
+//        paymentToCard.setBankName("中国工商银行");
+
         paymentToCard.setCardAttribute(CardAttribute.C);
-        paymentToCard.setCity("杭州市");
-        paymentToCard.setProvince("浙江省");
+
         paymentToCard.setCardName(new EncryptString("徐春锋"));
         paymentToCard.setCardNumber(new EncryptString("6222081202008477323"));
 

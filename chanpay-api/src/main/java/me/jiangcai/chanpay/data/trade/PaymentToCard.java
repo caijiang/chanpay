@@ -2,13 +2,22 @@ package me.jiangcai.chanpay.data.trade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import me.jiangcai.chanpay.AsynchronousNotifiable;
 import me.jiangcai.chanpay.BusinessSerial;
 import me.jiangcai.chanpay.TradeResponseHandler;
+import me.jiangcai.chanpay.converter.BankSerializer;
+import me.jiangcai.chanpay.converter.CitySerializer;
+import me.jiangcai.chanpay.converter.ProvinceSerializer;
+import me.jiangcai.chanpay.converter.SubBranchBankSerializer;
 import me.jiangcai.chanpay.data.trade.support.EncryptString;
+import me.jiangcai.chanpay.model.Bank;
 import me.jiangcai.chanpay.model.CardAttribute;
+import me.jiangcai.chanpay.model.City;
+import me.jiangcai.chanpay.model.Province;
+import me.jiangcai.chanpay.model.SubBranch;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;
@@ -17,6 +26,10 @@ import java.math.BigDecimal;
 /**
  * 2.14 付款到卡
  *
+ * @see me.jiangcai.chanpay.converter.BankSerializer
+ * @see me.jiangcai.chanpay.converter.ProvinceSerializer
+ * @see me.jiangcai.chanpay.converter.CitySerializer
+ * @see SubBranchBankSerializer
  * @author CJ
  */
 @EqualsAndHashCode(callSuper = true)
@@ -40,23 +53,34 @@ public class PaymentToCard extends TradeRequest implements BusinessSerial, Async
      */
     @JsonProperty("account_name")
     private EncryptString cardName;
-    /**
-     * 银行编号	String(10)	银行编号 见附录	不可空
-     */
+
+    @JsonSerialize(using = ProvinceSerializer.class)
+    private Province province;
+    @JsonSerialize(using = CitySerializer.class)
+    private City city;
     @JsonProperty("bank_code")
-    private String bankCode;
-    /**
-     * 银行名称	String(50)	银行全称 见附录	不可空
-     */
-    @JsonProperty("bank_name")
-    private String bankName;
-    /**
-     * 支行名称	String(255)		不可空	中国农业银行深圳南山支行
-     */
+    @JsonSerialize(using = BankSerializer.class)
+    private Bank bank;
     @JsonProperty("bank_branch")
-    private String bankBranch;
-    private String province;
-    private String city;
+    @JsonSerialize(using = SubBranchBankSerializer.class)
+    private SubBranch subBranch;
+    //    /**
+//     * 银行编号	String(10)	银行编号 见附录	不可空
+//     */
+//    @JsonProperty("bank_code")
+//    private String bankCode;
+//    /**
+//     * 银行名称	String(50)	银行全称 见附录	不可空
+//     */
+//    @JsonProperty("bank_name")
+//    private String bankName;
+//    /**
+//     * 支行名称	String(255)		不可空	中国农业银行深圳南山支行
+//     */
+//    @JsonProperty("bank_branch")
+//    private String bankBranch;
+//    private String province;
+//    private String city;
     @JsonProperty("card_type")
     private String type = "DEBIT";
     @JsonProperty("card_attribute")
