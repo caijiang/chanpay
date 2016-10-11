@@ -57,7 +57,7 @@ public class TransactionServiceTest extends ChanpayTest {
     @Test
     public void x214() throws IOException, SignatureException {
         PaymentToCard paymentToCard = new PaymentToCard();
-        paymentToCard.setAmount(BigDecimal.valueOf(100));
+        paymentToCard.setAmount(new BigDecimal("440495908.972"));
 
         paymentToCard.setCardName(new EncryptString("测试01"));
         paymentToCard.setCardNumber(new EncryptString("6214830215878947"));
@@ -82,7 +82,8 @@ public class TransactionServiceTest extends ChanpayTest {
         paymentToCard.setCardAttribute(CardAttribute.C);
 
 
-        System.out.println((Boolean) transactionService.execute(paymentToCard, null));
+        assertThat((boolean) transactionService.execute(paymentToCard, null))
+                .isTrue();
     }
 
     @Test

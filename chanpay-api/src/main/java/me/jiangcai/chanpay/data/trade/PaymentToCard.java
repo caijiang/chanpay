@@ -11,6 +11,7 @@ import me.jiangcai.chanpay.TradeResponseHandler;
 import me.jiangcai.chanpay.converter.BankSerializer;
 import me.jiangcai.chanpay.converter.CitySerializer;
 import me.jiangcai.chanpay.converter.ProvinceSerializer;
+import me.jiangcai.chanpay.converter.StandardMoneySerializer;
 import me.jiangcai.chanpay.converter.SubBranchBankSerializer;
 import me.jiangcai.chanpay.data.trade.support.EncryptString;
 import me.jiangcai.chanpay.model.Bank;
@@ -86,6 +87,7 @@ public class PaymentToCard extends TradeRequest implements BusinessSerial, Async
     @JsonProperty("card_attribute")
 //    @JsonSerialize(using = EnumSerializer.class)
     private CardAttribute cardAttribute;
+    @JsonSerialize(using = StandardMoneySerializer.class)
     private BigDecimal amount;
     @JsonProperty("notify_url")
     private String notifyUrl;

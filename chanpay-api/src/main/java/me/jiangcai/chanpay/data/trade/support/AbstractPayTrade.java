@@ -1,8 +1,10 @@
 package me.jiangcai.chanpay.data.trade.support;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import me.jiangcai.chanpay.converter.StandardMoneySerializer;
 import me.jiangcai.chanpay.data.trade.TradeRequest;
 import me.jiangcai.chanpay.model.CardAttribute;
 import me.jiangcai.chanpay.model.CardType;
@@ -29,6 +31,7 @@ public abstract class AbstractPayTrade extends TradeRequest {
     @JsonProperty("out_trade_no")
     private String serialNumber;
     @JsonProperty("trade_amount")
+    @JsonSerialize(using = StandardMoneySerializer.class)
     private BigDecimal amount;
     /**
      * 银行简码	String(20)		可空	pay_method为1时候，传递银行简码，否则为空；

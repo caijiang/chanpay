@@ -173,6 +173,11 @@ public class TransactionServiceImpl implements TransactionService {
         String code = request.preString();
 
         String sign = RSA.sign(code, privateKey, "UTF-8");
+        if (log.isDebugEnabled()) {
+            log.debug("PreSign " + code);
+            log.debug("sign " + sign);
+        }
+
         request.setSign(sign);
         request.setSignType("RSA");
     }
