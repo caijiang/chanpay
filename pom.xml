@@ -25,7 +25,6 @@
         <http.version>4.5.2</http.version>
         <javaee.version>7.0</javaee.version>
         <spring.version>4.2.5.RELEASE</spring.version>
-        <luffy.version>2.1-SNAPSHOT</luffy.version>
         <log4j2.version>2.4.1</log4j2.version>
         <jiangcai.version>2.2</jiangcai.version>
     </properties>
@@ -64,6 +63,19 @@
             <url>http://repo.jiangcai.me:8082/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>jc-nexus</id>
+            <name>Nexus Release Repository</name>
+            <url>http://repo.jiangcai.me:8082/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>jc-nexus</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://repo.jiangcai.me:8082/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
