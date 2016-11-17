@@ -119,13 +119,6 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void createMember(String loginName, String name, String id, String mobile) throws IOException {
-        // 建立请求
-        String uid = UUID.randomUUID().toString().replace("-", "");
-
-    }
-
-    @Override
     public <T> T execute(TradeRequest request, PayHandler<T> handler) throws IOException, SignatureException {
 
         request.setPartner(environment.getRequiredProperty("chanpay.partner"));

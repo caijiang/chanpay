@@ -29,11 +29,18 @@ public interface TransactionService {
      */
     Response execute(Request request) throws IOException, SignatureException, SystemException, ServiceException;
 
-    //http://dev.chanpay.com/doku.php/sdwg:%E5%BC%80%E5%A7%8B
-    //在线收款
-    void createMember(String loginName, String name, String id, String mobile) throws IOException;
-
-    <T> T execute(TradeRequest request, PayHandler<T> handler) throws IOException, SignatureException;
+    /**
+     * 执行CJT交易
+     *
+     * @param request 交易信息
+     * @param handler 响应处理器
+     * @param <T>     返回值的类型
+     * @return 交易成功的返回值
+     * @throws ServiceException   业务级别错误
+     * @throws IOException        网络交互错误
+     * @throws SignatureException 签名错误
+     */
+    <T> T execute(TradeRequest request, PayHandler<T> handler) throws ServiceException, IOException, SignatureException;
 
 
 }
