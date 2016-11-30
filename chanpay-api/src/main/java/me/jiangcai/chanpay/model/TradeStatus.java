@@ -9,5 +9,9 @@ public enum TradeStatus {
     PAY_FINISHED,
     TRADE_SUCCESS,
     TRADE_FINISHED,
-    TRADE_CLOSED
+    TRADE_CLOSED,
+    //    出款查询返回状态
+    submitted,
+    failed,
+    success
 }
