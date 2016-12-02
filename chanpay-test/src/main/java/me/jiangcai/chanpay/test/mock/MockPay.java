@@ -91,10 +91,16 @@ public class MockPay {
             mockNotifyUri = environment.getRequiredProperty("chanpay.notify.uri");
             String logsUri = environment.getRequiredProperty("chanpay.notify.logs");
 
-            FileSystemOptions options = new FileSystemOptions();
-            SftpFileSystemConfigBuilder.getInstance().setUserDirIsRoot(options, false);
-            logsRoot = VFS.getManager().resolveFile(logsUri, options);
-//            System.out.println(logsRoot);
+            FileObject fileObject = null;
+            try {
+                FileSystemOptions options = new FileSystemOptions();
+                SftpFileSystemConfigBuilder.getInstance().setUserDirIsRoot(options, false);
+                fileObject = VFS.getManager().resolveFile(logsUri, options);
+            } catch (Exception ex) {
+                log.error("INIT MockPay", ex);
+            }
+            logsRoot = fileObject;
+            log.debug("LogsRoot:" + logsRoot);
         } else {
             mockMvc = null;
             mockNotifyUri = null;
